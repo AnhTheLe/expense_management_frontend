@@ -67,7 +67,7 @@ const Account = () => {
                 Statistics
               </Button>
             </a>
-            <a href='/acount' className='active'>
+            <a href='/account' className='active'>
               <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<AccountBoxOutlinedIcon />}>
                 Account
               </Button>
