@@ -1,7 +1,7 @@
 import { AuthProvider } from "AuthContext";
 import SignInScreen from "features/SignInScreen";
 import SignUp from "features/SignUp";
-import Acount from "features/Acount";
+import Account from "features/Account";
 import GuestRoute from "general/components/AppRoutes/GuestRoute";
 import PrivateRoute from "general/components/AppRoutes/PrivateRoute";
 import AppToast from "general/components/AppToast";
@@ -29,11 +29,11 @@ function App() {
                         }
                     />
                     <Route
-                        path="/acount"
+                        path="/account"
                         element={
-                            <GuestRoute>
-                                <Acount />
-                            </GuestRoute>
+                            <PrivateRoute>
+                                <Account />
+                            </PrivateRoute>
                         }
                     />
                 </Routes>

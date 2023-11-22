@@ -22,11 +22,11 @@ function BaseLayout(props) {
                 <div className="row d-flex justify-content-center p-4">
                     <NavItem
                         className={selected === "category" ? "NavItem_active" : ""}
-                        onClick={() => navigate("/category")}
+                        onClick={() => navigate("/account")}
                         icon="fa-solid fa-list"
                         text="Danh mục"
                     />
-                    <NavItem
+                    {/* <NavItem
                         className={selected === "inventory" ? "NavItem_active" : ""}
                         onClick={() => navigate("/inventory")}
                         icon="fa-sharp fa-solid fa-warehouse"
@@ -37,7 +37,7 @@ function BaseLayout(props) {
                         onClick={() => navigate("/product")}
                         icon="fa-solid fa-mobile"
                         text="Sản phẩm"
-                    />
+                    /> */}
                 </div>
                 <div className="w-100 flex-grow-1 align-self-center d-flex flex-column justify-content-between m-1">
                     {props.children}

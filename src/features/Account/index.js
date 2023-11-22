@@ -20,7 +20,7 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 
 import DropdownMenu from './components/DropdownMenu'
 
-const Acount = () => {
+const Account = () => {
   return (
     <div className='layout-container'>
       <div className='header'>
@@ -194,4 +194,4 @@ const Acount = () => {
   )
 }
 
-export default Acount
+export default Account
