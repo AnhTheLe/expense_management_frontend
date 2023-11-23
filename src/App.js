@@ -6,6 +6,7 @@ import GuestRoute from "general/components/AppRoutes/GuestRoute";
 import PrivateRoute from "general/components/AppRoutes/PrivateRoute";
 import AppToast from "general/components/AppToast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "features/Home";
 
 function App() {
     return (
@@ -33,6 +34,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Account />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/home"
+                        element={
+                            <PrivateRoute>
+                                <Home />
                             </PrivateRoute>
                         }
                     />

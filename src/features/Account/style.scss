@@ -1,187 +1,81 @@
-.layout-container {
-  padding: 20px 10px;
-  background-color: #FAFAFA;
-  height: 100vh;
+.main-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
 
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    
-    .logo {
+  .edit-function {
+    border-right: solid 1px #000;
+    width: 30%;
+    .avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 100px;
 
+      img {
+        width: 50%;
+      }
     }
 
-    .nav-bar {
+    .button-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      width: 100%;
 
-      .menu {
-
-      }
-
-      .nav-items {
-        display: flex;
-
-        .nav-item {
-          a {
-            width: 35px;
-            height: 35px;
-            color: black;
-            margin-left: 20px;
-          }
-        }
-        
-        .search {
-          
-        }
-
-        .notification {
-        }
-
-        .profile {
-          color: #2F80ED;
-        }
+      a {
+        margin-bottom: 20px;
+        border-radius: 18px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 18px 0px;
       }
     }
   }
 
-  .bottom-container {
+  .user-info {
+    width: 100%;
+    margin-left: 40px;
     display: flex;
-    min-height: calc(100% - 60px);
+    justify-content: space-around;
 
-    .weed-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      
-      .weed {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 100px;
-
-        a {
-          margin-bottom: 16px;
-          border-radius: 18px;
-          box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 18px 0px;
+    .left-col {
+      .info-group {
+        margin-bottom: 20px;
+        .group-title {
+          margin-bottom: 10px;
+          color: #2f80ed;
+          font-weight: 700;
+          font-size: 20px;
         }
 
-        .active {
-          background-color: #2F80ED;
-          color: #fff;
-        }
-      }
-
-      .more-setting {
-        display: flex;
-        flex-direction: column;
-
-        a {
-          margin-bottom: 20px;
-          border-radius: 18px;
-          box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 18px 0px;
+        .info {
+          .info-item {
+            .info-title {
+              font-weight: 700;
+              color: #505050;
+            }
+            .info-content {
+            }
+          }
         }
       }
     }
 
-    .main-content-container {
-      width: 100%;
-      margin-left: 20px;
-      background-color: #EBEBEB;
-      border-radius: 20px;
-      padding: 40px;
-      display: flex;
-      align-items: center;
-
-      .main-content {
-        display: flex;
-        width: 100%;
-        align-items: center;
-
-        .edit-function {
-          border-right: solid 1px #000;
-          width: 30%;
-          .avatar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 100px;
-
-            img {
-              width: 50%;
-            }
-          }
-
-          .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            a {
-              margin-bottom: 20px;
-              border-radius: 18px;
-              box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 18px 0px;
-            }
-          }
+    .right-col {
+      .info-group {
+        margin-bottom: 20px;
+        .group-title {
+          margin-bottom: 10px;
+          color: #2f80ed;
+          font-weight: 700;
+          font-size: 20px;
         }
 
-        .user-info {
-          width: 100%;
-          margin-left: 40px;
-          display: flex;
-          justify-content: space-around;
-
-          .left-col {
-            
-            .info-group {
-              margin-bottom: 20px;
-              .group-title {
-                margin-bottom: 10px;
-                color: #2F80ED;
-                font-weight: 700;
-                font-size: 20px;
-              }
-
-              .info {
-                
-                .info-item {
-                  .info-title {
-                    font-weight: 700;
-                    color: #505050;
-                  }
-                  .info-content{
-
-                  }
-                }
-              }
+        .info {
+          .info-item {
+            .info-title {
+              font-weight: 700;
+              color: #505050;
             }
-          }
-
-          .right-col {
-            .info-group {
-              margin-bottom: 20px;
-              .group-title {
-                margin-bottom: 10px;
-                color: #2F80ED;
-                font-weight: 700;
-                font-size: 20px;
-              }
-
-              .info {
-                
-                .info-item {
-                  .info-title {
-                    font-weight: 700;
-                    color: #505050;
-                  }
-                  .info-content{
-
-                  }
-                }
-              }
+            .info-content {
             }
           }
         }

@@ -5,7 +5,7 @@ import "./style.scss";
 NavItem.propTypes = {
     className: PropTypes.string,
     text: PropTypes.string,
-    icon: PropTypes.string,
+    icon: PropTypes.node,
     onClick: PropTypes.func,
 };
 
@@ -19,12 +19,12 @@ NavItem.defaultProps = {
 function NavItem(props) {
     const { className, text, icon, onClick } = props;
     return (
-        <div className="col-4">
+        <div>
             <div
-                className={`NavItem d-flex justify-content-center align-items-center py-3 px-4 ${className}`}
+                className={`NavItem d-flex justify-content-center align-items-center py-2 px-4 ${className}`}
                 onClick={onClick}
             >
-                <i className={`pe-3 ${icon}`}></i>
+                <div style={{paddingRight: "8px"}}>{icon}</div>
                 <div className={`NavItemName`}>{text}</div>
             </div>
         </div>
