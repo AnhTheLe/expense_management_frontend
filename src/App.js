@@ -32,9 +32,9 @@ function App() {
                     <Route
                         path="/account"
                         element={
-                            <PrivateRoute>
+                            <GuestRoute>
                                 <Account />
-                            </PrivateRoute>
+                            </GuestRoute>
                         }
                     />
                     <Route

@@ -1,12 +1,10 @@
 import React from 'react'
 import './style.scss'
-import Logo from '../../assets/images/logo.png'
 import Avatar from '../../assets/images/profile-avatar.png'
 import Button from '@mui/material/Button';
 
 
 
-import DropdownMenu from './components/DropdownMenu'
 import BaseLayout from 'general/components/BaseLayout';
 
 const Account = () => {
@@ -20,12 +18,12 @@ const Account = () => {
             <img src={Avatar} alt='Logo' />
           </div>
           <div className='button-container'>
-            <a href='#'>
+            <a href='/'>
               <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: 'white', borderRadius: '18px' }} variant="text">
                 Edit Profile
               </Button>
             </a>
-            <a href='#'>
+            <a href='/'>
               <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: 'white', borderRadius: '18px' }} variant="text">
                 Change Password
               </Button>
