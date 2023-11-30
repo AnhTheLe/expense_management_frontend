@@ -15,6 +15,7 @@ function SignInScreen(props) {
 
     const handleSignIn = () => {
         login(username, password);
+        return;
     };
 
     return (
@@ -22,38 +23,42 @@ function SignInScreen(props) {
             <div className="SignInForm">
                 <div>
                     <h1 style={{ fontWeight: "600", textAlign: "center" }}>
-                        Đăng nhập
+                        Sign in
                     </h1>
                     <div>
                         <BaseTextField
                             className="mb-3"
                             name="username"
-                            placeholder="Nhập tài khoản..."
-                            label="Tài khoản"
+                            placeholder="Enter username..."
+                            label="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            error="Bạn chưa nhập tài khoản"
+                            error="You have not entered a username"
                         />
                     </div>
-                    
+
                     <div>
                         <BaseTextField
                             className="mb-3"
                             type="password"
                             name="password"
-                            placeholder="Nhập mật khẩu..."
-                            label="Mật khẩu"
+                            placeholder="Enter password..."
+                            label="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            error="Bạn chưa nhập mật khẩu"
+                            error="You have not entered a password"
                         />
                     </div>
                     <AppButton
                         className="btn-blue mt-5 w-100"
-                        text="Đăng nhập"
+                        text="Sign in"
                         onClick={handleSignIn}
-                        disabled={username.length == 0 || password.length == 0}
+                        disabled={username.length === 0 || password.length === 0}
                     />
+
+                    <div className="signInFooter">
+                        If you don't have an account, please{" "} <a href='#' onClick={() => navigate("/sign-up")}>sign up</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ GuestRoute.propTypes = {};
 
 function GuestRoute(props) {
     const { isLoggedIn } = useContext(AuthContext);
-    return !isLoggedIn ? props.children : <Navigate to="/account" />;
+    return !isLoggedIn ? props.children : <Navigate to="/home" />;
 }
 
 export default GuestRoute;

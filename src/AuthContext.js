@@ -6,7 +6,9 @@ import {
 import PreferenceKeys from "general/constants/PreferenceKeys";
 import ToastHelper from "general/helpers/ToastHelper";
 import UserHelper from "general/helpers/UserHelper";
+import { async } from "q";
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const AuthContext = createContext();
 
@@ -19,16 +21,16 @@ const AuthProvider = ({ children }) => {
             UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired()
         );
         setUser(UserHelper.getUsername());
-        return () => {};
+        return () => { };
     }, []);
 
-    const login = (username, password) => {
+    const login = async (username, password) => {
         try {
-            const fetchData = async () => {
-                const response = await authApi.signIn({
-                    username: username,
-                    password: password,
-                });
+            const response = await authApi.signIn({
+                username: username,
+                password: password,
+            });
+            if(response) {
                 updateAxiosAccessToken(response.accessToken);
                 localStorage.setItem(
                     PreferenceKeys.accessToken,
@@ -39,12 +41,49 @@ const AuthProvider = ({ children }) => {
                     response.refreshToken
                 );
                 setLoggedIn(true);
-            };
-            fetchData();
+                ToastHelper.showSuccess("Đăng nhập thành công");
+            }
         } catch (error) {
-            ToastHelper.showError("Tài khoản hoặc mật khẩu không chính xác");
+            console.log("error",error);
+            ToastHelper.showError(error.message);
+            return;
         }
     };
+
+    const signUp = async(username, password, email, phone) => {
+        try {
+            const response = await authApi.signUp({
+                username: username,
+                password: password,
+                email: email,
+                phone: phone,
+            });
+            if(response) {
+                updateAxiosAccessToken(response.data.accessToken);
+                localStorage.setItem(
+                    PreferenceKeys.accessToken,
+                    response.data.accessToken
+                );
+                localStorage.setItem(
+                    PreferenceKeys.refreshToken,
+                    response.data.refreshToken
+                );
+                setLoggedIn(true);
+                ToastHelper.showSuccess("Đăng ký thành công");
+            }
+        } catch (error) {
+            console.log("error",error.response.data.message);
+            if(error.response.data?.data[0]?.message) {
+                console.log("here")
+                ToastHelper.showError(error.response.data.data[0].message);
+                return;
+            } else {
+                ToastHelper.showError(error.response?.data?.message);
+                return;
+            }
+            
+        }
+    }
 
     const logout = () => {
         UserHelper.signOut();
@@ -59,6 +98,7 @@ const AuthProvider = ({ children }) => {
                 user,
                 login,
                 logout,
+                signUp,
             }}
         >
             {children}
