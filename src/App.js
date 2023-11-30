@@ -1,9 +1,12 @@
 import { AuthProvider } from "AuthContext";
 import SignInScreen from "features/SignInScreen";
 import SignUp from "features/SignUp";
+import Account from "features/Account";
 import GuestRoute from "general/components/AppRoutes/GuestRoute";
+import PrivateRoute from "general/components/AppRoutes/PrivateRoute";
 import AppToast from "general/components/AppToast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "features/Home";
 
 function App() {
     return (
@@ -24,6 +27,22 @@ function App() {
                             <GuestRoute>
                                 <SignUp />
                             </GuestRoute>
+                        }
+                    />
+                    <Route
+                        path="/account"
+                        element={
+                            <PrivateRoute>
+                                <Account />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/home"
+                        element={
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
                         }
                     />
                 </Routes>
