@@ -96,21 +96,24 @@ function BaseLayout(props) {
                             icon={<HomeOutlinedIcon />}
                             text="Home"
                         />
-                        <a href='#'>
-                            <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<DashboardOutlinedIcon />}>
-                                Recently
-                            </Button>
-                        </a>
-                        <a href='#'>
-                            <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<CalendarMonthOutlinedIcon />}>
-                                Category
-                            </Button>
-                        </a>
-                        <a href='#'>
-                            <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<AssessmentOutlinedIcon />}>
-                                Statistics
-                            </Button>
-                        </a>
+                        <NavItem
+                            className={selected === "recently" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/recently")}
+                            icon={<DashboardOutlinedIcon/>}
+                            text="Recently"
+                        />
+                       <NavItem
+                            className={selected === "category" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/category")}
+                            icon={<CalendarMonthOutlinedIcon />}
+                            text="Category"
+                        />
+                        <NavItem
+                            className={selected === "statistics" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/statistics")}
+                            icon={<AssessmentOutlinedIcon />}
+                            text="Statistics"
+                        />
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
                             onClick={() => navigate("/account")}
