@@ -101,16 +101,23 @@ function BaseLayout(props) {
                                 Recently
                             </Button>
                         </a>
-                        <a href='#'>
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<CalendarMonthOutlinedIcon />}>
                                 Category
                             </Button>
-                        </a>
+                        </a> */}
+                        <NavItem
+                            className={selected === "category" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/category")}
+                            icon={<CalendarMonthOutlinedIcon />}
+                            text="Category"
+                        />
                         <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<AssessmentOutlinedIcon />}>
                                 Statistics
                             </Button>
                         </a>
+                        
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
                             onClick={() => navigate("/account")}

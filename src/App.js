@@ -7,6 +7,7 @@ import PrivateRoute from "general/components/AppRoutes/PrivateRoute";
 import AppToast from "general/components/AppToast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "features/Home";
+import Category from "features/Category";
 
 function App() {
     return (
@@ -42,6 +43,15 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Home />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/category"
+                        element={
+                            <PrivateRoute>
+                                <Category />
                             </PrivateRoute>
                         }
                     />

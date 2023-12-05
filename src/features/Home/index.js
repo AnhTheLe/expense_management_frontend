@@ -13,9 +13,7 @@ const Home = () => {
       <div className='main-content'>
         Home
       </div>
-
     </BaseLayout>
-
   )
 }
 
