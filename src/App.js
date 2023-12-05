@@ -2,6 +2,9 @@ import { AuthProvider } from "AuthContext";
 import SignInScreen from "features/SignInScreen";
 import SignUp from "features/SignUp";
 import Account from "features/Account";
+import Recently from "features/Recently";
+import Category from "features/Category";
+import Statistics from "features/Statistcs";
 import GuestRoute from "general/components/AppRoutes/GuestRoute";
 import PrivateRoute from "general/components/AppRoutes/PrivateRoute";
 import AppToast from "general/components/AppToast";
@@ -46,7 +49,6 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-
                     <Route
                         path="/category"
                         element={
