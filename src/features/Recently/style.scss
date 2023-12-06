@@ -37,4 +37,18 @@
             }
         }
     }
+    .add-button {
+        display: flex;
+        border-radius: 50px;
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        right:  10vh;
+        bottom: 1vh;
+        border: 1px solid #000;
+        background: #fff;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
 }
