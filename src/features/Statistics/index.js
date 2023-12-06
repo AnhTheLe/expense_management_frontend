@@ -10,8 +10,10 @@ const Statistics = () => {
   return (
 
     <BaseLayout selected='statistics'>
-      <div className='main-content'>
-        Home
+      <div className='statistics'>
+        <div className='main-content'>
+          statistics
+        </div>
       </div>
 
     </BaseLayout>
