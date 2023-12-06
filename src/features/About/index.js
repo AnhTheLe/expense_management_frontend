@@ -16,7 +16,7 @@ const About = () => {
                 <div className='content'>
                     <b>Website information</b> <br></br>
                     Website name: Money+ <br></br>
-                    Development team: ENDO<br></br>
+                    Team: ENDO<br></br>
                     Version: 2.0<br></br>
                     <br></br>
                     <b>About this site:</b><br></br>
