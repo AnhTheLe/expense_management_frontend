@@ -131,11 +131,17 @@ function BaseLayout(props) {
                         </a> */}
                     </div>
                     <div className='more-setting'>
-                        <a href='#'>
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<InfoOutlinedIcon />}>
                                 About us
                             </Button>
-                        </a>
+                        </a> */}
+                        <NavItem
+                            className={selected === "about" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/about")}
+                            icon={<InfoOutlinedIcon />}
+                            text="About us"
+                        />
                         <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<SettingsApplicationsOutlinedIcon />}>
                                 Setting
