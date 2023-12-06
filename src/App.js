@@ -65,6 +65,14 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/recently"
+            element={
+              <PrivateRoute>
+                <Recently />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <AppToast />

@@ -30,7 +30,7 @@ const Category = () => {
             </div>
           ))}
         </div>
-        <div className="add-button">
+        <button className="add-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="50"
@@ -54,7 +54,7 @@ const Category = () => {
               stroke-linejoin="round"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </BaseLayout>
   );

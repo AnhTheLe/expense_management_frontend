@@ -1,22 +1,39 @@
 .main-content {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    
+    width: 100%; 
     align-items: flex-start;
     .add-button {
         display: flex;
+        border-radius: 50px;
+        width: 90px;
+        height: 90px;
         position: absolute;
-        border-radius: 36px;
-        width: 40px;
-        height: 40px;
-        top: 50%;
-        right: 0;
+        right:  10vh;
+        bottom: 1vh;
         border: 1px solid #000;
         background: #fff;
         align-items: center;
         justify-content: center;
+        position: fixed;
     }
+    .add-button:hover{
+        background: #D9D9D9;
+    }
+    // .add-button {
+    //     display: flex;
+    //     position: absolute;
+    //     border-radius: 36px;
+    //     width: 40px;
+    //     height: 40px;
+    //     top: 50%;
+    //     right: 0;
+    //     border: 1px solid #000;
+    //     background: #fff;
+    //     align-items: center;
+    //     justify-content: center;
+    //     position:fixed;
+    // }
     .title {
         color: #000;
         font-size: 20px;
