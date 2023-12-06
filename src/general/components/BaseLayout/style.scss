@@ -2,7 +2,7 @@
     padding: 20px 10px;
     background-color: #FAFAFA;
     height: 100vh;
-  
+    position: relative;
     .header {
       display: flex;
       align-items: center;
@@ -92,9 +92,11 @@
         margin-left: 20px;
         background-color: #EBEBEB;
         border-radius: 20px;
-        padding: 40px;
-        display: flex;
-        align-items: center;
+        padding: 20px;
+        max-height: calc(100% - 82px);
+        overflow: auto;
+        // display: flex;
+        // align-items: center;
       }
     }
   }

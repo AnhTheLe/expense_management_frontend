@@ -1,0 +1,54 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    align-items: flex-start;
+    .title {
+        color: #000;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 16px;
+    }
+    .expense-list {
+        width: 100%;
+        border-radius: 25px;
+        padding: 16px;
+        background: #D9D9D9;
+        .expense{
+            border-radius: 16px;
+            // display: flex;
+            padding: 8px;
+            margin: 8px;
+            background: white;
+            // align-items: center;
+            .date{
+                font-weight: 650;
+            }
+            .item-list{
+                padding: 8px;
+                margin: 8px;
+                .item{
+                    margin:8px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+    .add-button {
+        display: flex;
+        border-radius: 50px;
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        right:  10vh;
+        bottom: 1vh;
+        border: 1px solid #000;
+        background: #fff;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
+}
