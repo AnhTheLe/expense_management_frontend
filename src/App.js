@@ -73,6 +73,14 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/statistics"
+            element={
+              <PrivateRoute>
+                <Statistics />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <AppToast />

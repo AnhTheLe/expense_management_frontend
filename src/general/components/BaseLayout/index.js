@@ -118,11 +118,17 @@ function BaseLayout(props) {
                             icon={<CalendarMonthOutlinedIcon />}
                             text="Category"
                         />
-                        <a href='#'>
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<AssessmentOutlinedIcon />}>
                                 Statistics
                             </Button>
-                        </a>
+                        </a> */}
+                        <NavItem
+                            className={selected === "statistics" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/statistics")}
+                            icon={<AssessmentOutlinedIcon />}
+                            text="Statistic"
+                        />
                         
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
