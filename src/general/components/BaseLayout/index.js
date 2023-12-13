@@ -96,21 +96,40 @@ function BaseLayout(props) {
                             icon={<HomeOutlinedIcon />}
                             text="Home"
                         />
-                        <a href='#'>
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<DashboardOutlinedIcon />}>
                                 Recently
                             </Button>
-                        </a>
-                        <a href='#'>
+                        </a> */}
+                        <NavItem
+                            className={selected === "recently" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/recently")}
+                            icon={<DashboardOutlinedIcon />}
+                            text="Recently"
+                        />
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<CalendarMonthOutlinedIcon />}>
                                 Category
                             </Button>
-                        </a>
-                        <a href='#'>
+                        </a> */}
+                        <NavItem
+                            className={selected === "category" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/category")}
+                            icon={<CalendarMonthOutlinedIcon />}
+                            text="Category"
+                        />
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<AssessmentOutlinedIcon />}>
                                 Statistics
                             </Button>
-                        </a>
+                        </a> */}
+                        <NavItem
+                            className={selected === "statistics" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/statistics")}
+                            icon={<AssessmentOutlinedIcon />}
+                            text="Statistic"
+                        />
+                        
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
                             onClick={() => navigate("/account")}
@@ -124,11 +143,17 @@ function BaseLayout(props) {
                         </a> */}
                     </div>
                     <div className='more-setting'>
-                        <a href='#'>
+                        {/* <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<InfoOutlinedIcon />}>
                                 About us
                             </Button>
-                        </a>
+                        </a> */}
+                        <NavItem
+                            className={selected === "about" ? "NavItem_active" : ""}
+                            onClick={() => navigate("/about")}
+                            icon={<InfoOutlinedIcon />}
+                            text="About us"
+                        />
                         <a href='#'>
                             <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<SettingsApplicationsOutlinedIcon />}>
                                 Setting

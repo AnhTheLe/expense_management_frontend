@@ -10,12 +10,12 @@ const Home = () => {
   return (
 
     <BaseLayout selected='home'>
-      <div className='main-content'>
-        Home
+      <div className='home'>
+        <div className='main-content'>
+          Home
+        </div>
       </div>
-
     </BaseLayout>
-
   )
 }
 

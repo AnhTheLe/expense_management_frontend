@@ -1,0 +1,20 @@
+.about {
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    align-items: flex-start;
+    .box {
+      width: 40%;
+      background-color: #d9d9d9;
+      padding: 40px 30px 20px 20px;
+      border-radius: 25px;
+      .box-content {
+        border-radius: 16px;
+        background-color: white;
+        padding: 20px 20px 20px 20px;
+      }
+    }
+  }
+}
