@@ -70,3 +70,28 @@
     }
   }
 }
+
+DialogModal{
+  .label{
+    justify-content: center;
+  }
+  .imagelabel{
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .add-category,input[type="text"]{
+    width: 611px;
+    height: 54px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 15px 0 15px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  input[type="file"] {
+    display: none;
+  } 
+} 
