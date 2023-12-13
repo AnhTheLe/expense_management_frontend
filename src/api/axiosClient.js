@@ -33,19 +33,10 @@ axiosClient.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.log(error);
-        let errorMessage = null;
-        const originalRequest = error.config;
-        const response = error.response;
-        if (response && (response.status === 403 || response.status === 401)) {
-            return refreshToken().then(() => {
-                return axiosClient(originalRequest);
-            });
+        if (error.response && error.response.data) {
+            return Promise.reject(error.response.data);
         }
-        if (errorMessage) {
-            console.error(errorMessage);
-        }
-        throw error;
+        return Promise.reject(error.message);
     }
 );
 
@@ -76,8 +67,7 @@ const refreshToken = async () => {
                 PreferenceKeys.refreshToken
             );
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/auth/refresh-token`,
-                {},
+                `${process.env.REACT_APP_API_URL}/users/refresh-token`,
                 {
                     headers: {
                         RefreshToken: `Bearer ${refreshToken}`,
@@ -87,9 +77,13 @@ const refreshToken = async () => {
             console.log(response);
             localStorage.setItem(
                 PreferenceKeys.accessToken,
-                response.data.access_token
+                response.accessToken
             );
-            updateAxiosAccessToken(response.data.access_token);
+            localStorage.setItem(
+                PreferenceKeys.refreshToken,
+                response.refreshToken
+            )
+            updateAxiosAccessToken(response.accessToken);
         }
         // axiosClient(originalRequest);
     } else {
