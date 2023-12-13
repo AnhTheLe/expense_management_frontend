@@ -1,4 +1,33 @@
 .statistics {
   .main-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        
+        .general-stats {
+          padding-left: 16px;
+          padding-right: 16px;
+          display: flex;
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-between;
+          .stat {
+            margin: 8px;
+            padding: 16px;
+            background-color: white;
+            border-radius: 12px;
+            font-weight: 500;
+          }
+        }
+        .charts {
+          margin-top: 20px;
+          padding: 16px;
+          display: flex;
+          border-radius: 12px;
+          background-color: white;
+          width: 100%;
+          flex-direction: row;
+        }
   }
 }
