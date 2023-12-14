@@ -1,12 +1,25 @@
 import React from "react";
 import "./style.scss";
-import Logo from "../../assets/images/logo.png";
-import Avatar from "../../assets/images/profile-avatar.png";
+import {useState} from "react"
 import Button from "@mui/material/Button";
-
 import BaseLayout from "general/components/BaseLayout";
+import DialogModal from "general/components/DialogModal";
+import useStyles from "./category.style";
+import { UploadFile } from "@mui/icons-material";
+import Uploader from "general/components/Uploader/Uploader";
 
 const Category = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const classes = useStyles();
+  const handleClose = () =>{
+    setShowModal(false);
+  }
+
+  const handleExecute = () =>{
+    setShowModal(false);
+  }
+
   const categories = [
     { name: "Category 1", img: "url1" },
     { name: "Category 2", img: "url2" },
@@ -31,7 +44,7 @@ const Category = () => {
               </div>
             ))}
           </div>
-          <button className="add-button">
+          <Button class="add-button" onClick={() => setShowModal(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="50"
@@ -55,8 +68,20 @@ const Category = () => {
                 stroke-linejoin="round"
               />
             </svg>
-          </button>
+          </Button>
+
         </div>
+        <DialogModal
+            show={showModal}
+            title={"New Category"}
+            onClose={handleClose}
+            onExecute={handleExecute}
+          >
+            <label className={classes.label} for="add-category">Category name</label>
+            <input type="text" className={classes.addCategory} id="add-category" placeholder="New category" required=""/>
+            <div className={classes.imageText} icon={UploadFile}>Image</div>
+            <Uploader style={{height:"300px",width:"100%"}}/>
+          </DialogModal>
       </div>
     </BaseLayout>
   );

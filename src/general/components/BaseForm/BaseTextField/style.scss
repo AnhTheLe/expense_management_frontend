@@ -17,7 +17,8 @@
 
     &_Group {
         height: 40px;
-        border: 1px solid #DBE3EF;
+        border: 1px solid #DBE3EF;  
+        border-radius: 25px;
 
         &:focus-within {
             border: 1px solid #3E97FF;
