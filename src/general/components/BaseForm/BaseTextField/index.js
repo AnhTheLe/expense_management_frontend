@@ -96,7 +96,7 @@ function BaseTextField(props) {
                     </div>
                 )}
                 <div
-                    className={`BaseTextField_Group rounded input-group ${
+                    className={`BaseTextField_Group input-group ${
                         !disabled && "bg-white"
                     }  d-flex flex-row  justify-content-between ${
                         disabled && "BaseTextField_Disabled"

@@ -1,12 +1,28 @@
 import React from "react";
 import "./style.scss";
-import Logo from "../../assets/images/logo.png";
-import Avatar from "../../assets/images/profile-avatar.png";
+import {useState} from "react";
 import Button from "@mui/material/Button";
-
+import Grid from "@mui/material/Grid";
 import BaseLayout from "general/components/BaseLayout";
+import PlusIcon from "general/components/PlusIcon";
+import useStyles from "./recently.style";
+import DialogModal from "general/components/DialogModal";
+import DropdownMenu from "./components/DropdownMenu";
+import BaseTextField from "general/components/BaseForm/BaseTextField";
 
 const Recently = () => {
+
+  const [showModal, setShowModal] = useState(false);
+  const classes = useStyles({"height":"300px"});
+
+  const handleClose = () =>{
+    setShowModal(false);
+  }
+
+  const handleExecute = () =>{
+    setShowModal(false);
+  }
+
   const ExpenseItem = ({ name, price }) => (
     <div className="item">
       <div className="name">{name}</div>
@@ -61,33 +77,34 @@ const Recently = () => {
               <ExpenseList key={index} {...expense} />
             ))}
           </div>
-          <button className="add-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50"
-              height="50"
-              viewBox="0 0 50 50"
-              fill="none"
-            >
-              <path d="M0 0H50V50H0V0Z" fill="white" fill-opacity="0.01" />
-              <path
-                d="M25.0634 10.4167L25.0251 39.5834"
-                stroke="black"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M10.4167 25.0001H39.5834"
-                stroke="black"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+          <Button class="add-button" onClick={() => setShowModal(true)}>
+            <PlusIcon/>
+          </Button>
         </div>
+        <DialogModal
+          show={showModal}
+          title={"New Expenses"}
+          onClose={handleClose}
+          onExecute={handleExecute}
+          >
+          <Grid container spacing={2} columns={16}>
+            <Grid item sm={10}>
+              <BaseTextField label="Title Card"/>
+              <BaseTextField label="Description" autoHeight={true} className={classes.addCategory}/>
+            </Grid>
+            <Grid item sm={6}>
+              <BaseTextField label="Date" type="date"/>
+              <DropdownMenu label="Category"/>
+              <BaseTextField label="Price"/>
+            </Grid>
+          </Grid>
+        </DialogModal>
       </div>
+      </BaseLayout>
+  );
+};
+
+export default Recently;
       {/* <div className='main-content'>
         <div className='title'>List of expenses</div>
         <div className='expense-list'>
@@ -140,8 +157,4 @@ const Recently = () => {
           </div>
         </div>
       </div> */}
-    </BaseLayout>
-  );
-};
 
-export default Recently;

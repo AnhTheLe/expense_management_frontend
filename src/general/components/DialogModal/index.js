@@ -26,8 +26,8 @@ DialogModal.defaultProps = {
     description: "",
     onExecute: null,
     title: "",
-    textBtnCancel: "",
-    textBtnExecute: "",
+    textBtnCancel: "Cancel",
+    textBtnExecute: "Apply",
 };
 
 function DialogModal(props) {
@@ -45,7 +45,7 @@ function DialogModal(props) {
     } = props;
     function handleClose() {
         if (onClose) {
-            onClose();
+            onClose(()=>{close=true});
         }
     }
     function handleExecute() {
@@ -67,9 +67,9 @@ function DialogModal(props) {
             </Modal.Header>
 
             {/* modal content */}
-            <Modal.Body className="d-flex flex-column align-items-center justify-content-center bg-light py-0">
+            <Modal.Body className="d-flex flex-column bg-light py-0">
                 {icon && <i className={`${icon} fa-6x py-5 my-2`}></i>}
-                <p className="text-center font-weight-bold">{description}</p>
+                <p className="text-left font-weight-bold">{description}</p>
                 {props.children}
             </Modal.Body>
             {/* modal footer */}
