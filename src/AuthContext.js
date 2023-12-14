@@ -20,9 +20,25 @@ const AuthProvider = ({ children }) => {
         setLoggedIn(
             UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired()
         );
-        setUser(UserHelper.getUsername());
+        // setUser(UserHelper.getUsername());
+        const currentUsername = UserHelper.getUsername();
+        const getCurrentUser = async () => {
+            const currentUser = await authApi.getCurrentUser({ username: currentUsername });
+            if (currentUser) {
+                setUser(currentUser.data);
+            }
+        }
+        getCurrentUser(UserHelper.getUsername());
         return () => { };
     }, []);
+    
+    console.log("user", user);
+    const getCurrentUser = async (username) => {
+        const currentUser = await authApi.getCurrentUser({ username: username });
+        if (currentUser) {
+            setUser(currentUser);
+        }
+    }
 
     const login = async (username, password) => {
         try {
@@ -30,7 +46,7 @@ const AuthProvider = ({ children }) => {
                 username: username,
                 password: password,
             });
-            if(response) {
+            if (response) {
                 updateAxiosAccessToken(response.accessToken);
                 localStorage.setItem(
                     PreferenceKeys.accessToken,
@@ -41,16 +57,21 @@ const AuthProvider = ({ children }) => {
                     response.refreshToken
                 );
                 setLoggedIn(true);
-                ToastHelper.showSuccess("Đăng nhập thành công");
+                ToastHelper.showSuccess("Login success");
+                getCurrentUser(username);
             }
         } catch (error) {
-            console.log("error",error);
-            ToastHelper.showError(error.message);
+            console.log("error", error);
+            if (error.data.message) {
+                ToastHelper.showError(error.data.message);
+            }
+            else { ToastHelper.showError(error.message) };
+            removeAxiosAccessToken();
             return;
         }
     };
 
-    const signUp = async(username, password, email, phone) => {
+    const signUp = async (username, password, email, phone) => {
         try {
             const response = await authApi.signUp({
                 username: username,
@@ -58,7 +79,7 @@ const AuthProvider = ({ children }) => {
                 email: email,
                 phone: phone,
             });
-            if(response) {
+            if (response) {
                 updateAxiosAccessToken(response.data.accessToken);
                 localStorage.setItem(
                     PreferenceKeys.accessToken,
@@ -72,8 +93,8 @@ const AuthProvider = ({ children }) => {
                 ToastHelper.showSuccess("Đăng ký thành công");
             }
         } catch (error) {
-            console.log("error",error.response.data.message);
-            if(error.response.data?.data[0]?.message) {
+            console.log("error", error.response.data.message);
+            if (error.response.data?.data[0]?.message) {
                 console.log("here")
                 ToastHelper.showError(error.response.data.data[0].message);
                 return;
@@ -81,7 +102,7 @@ const AuthProvider = ({ children }) => {
                 ToastHelper.showError(error.response?.data?.message);
                 return;
             }
-            
+
         }
     }
 
