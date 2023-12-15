@@ -57,7 +57,7 @@ const removeAxiosAccessToken = () => {
     delete axiosClient.defaults.headers.common["Authorization"];
 };
 
-const refreshToken = async () => {
+export const refreshToken = async () => {
     if (UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired()) {
         if (!UserHelper.checkAccessTokenExpired()) {
             const token = localStorage.getItem(PreferenceKeys.accessToken);

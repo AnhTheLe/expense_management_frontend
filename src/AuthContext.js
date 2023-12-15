@@ -1,5 +1,6 @@
 import authApi from "api/authApi";
 import {
+    refreshToken,
     removeAxiosAccessToken,
     updateAxiosAccessToken,
 } from "api/axiosClient";
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        refreshToken();
         const checkUserToken = async () => {
             const isLoggedIn = UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired();
             setLoggedIn(isLoggedIn);
@@ -24,7 +26,7 @@ const AuthProvider = ({ children }) => {
             if (isLoggedIn) {
                 const currentUsername = UserHelper.getUsername();
                 try {
-                    const currentUser = await authApi.getCurrentUser({ username: currentUsername });
+                    const currentUser = await authApi.getCurrentUser(currentUsername);
                     if (currentUser && currentUser.data) {
                         setUser(currentUser.data);
                     }
@@ -61,7 +63,7 @@ const AuthProvider = ({ children }) => {
                 );
                 setLoggedIn(true);
                 ToastHelper.showSuccess("Login success");
-                const currentUser = await authApi.getCurrentUser({ username: username });
+                const currentUser = await authApi.getCurrentUser(username);
                 if (currentUser) {
                     setUser(currentUser);
                 }
