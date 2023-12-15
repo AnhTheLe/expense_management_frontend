@@ -10,8 +10,8 @@ const authApi = {
         return axiosClient.post(url, params);
     },
     getCurrentUser: (params) => {
-        const url = '/user/current-user';
-        return axiosClient.get(url, {params});
+        const url = 'user/current-user?username=' + params;
+        return axiosClient.get(url);
     }
     // signOut: () => {
     //     const url = '/users/sign-out';

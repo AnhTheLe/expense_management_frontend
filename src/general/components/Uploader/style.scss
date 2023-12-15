@@ -1,0 +1,21 @@
+form{
+    background-color: #fff;
+    height: 300px;
+    display: flex ;
+    flex-direction:  column ;
+    justify-content:  center ;
+    text-align:  center;
+    align-items: center;
+    cursor:  pointer ;
+    border-radius:  25px ;
+    border: 1px solid #ccc;
+    margin: 8px 0;
+}
+.uploadedRow{
+    margin:  10px 0 !important;
+    display:  flex ;
+    justify-content:  space-between;
+    align-items:  center ;
+    padding:  15px 20px ;
+    border-radius:  5px ;
+}
