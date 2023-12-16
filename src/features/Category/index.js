@@ -13,6 +13,9 @@ import { imageDb } from "fireBaseConfig/config";
 import { v4 } from "uuid";
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import DeleteIcon from "svg/DeleteIcon";
+import { AuthContext } from "AuthContext";
+import { useContext } from "react";
+import Utils from "general/utils/Utils";
 
 const Category = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,17 +23,22 @@ const Category = () => {
   const [image, setImage] = useState();
   const [fileName, setFileName] = useState("No selected file")
   const [categoryName, setCategoryName] = useState(null)
+  const { timeSearch } = useContext(AuthContext)
+  const [urlImage, setUrlImage] = useState(null)
   const classes = useStyles();
+  console.log("image", image)
 
   const handleExecute = async () => {
     if (checkCategoryName(categoryName)) {
-      if (image !== null) {
+      if (image && (!urlImage || urlImage === "")) {
         const imgRef = ref(imageDb, `files/${v4()}`);
         uploadBytes(imgRef, image).then(value => {
           getDownloadURL(value.ref).then(url => {
             sendUrlToBackend(url); // Gửi URL về backend khi ảnh được tải lên
           });
         });
+      } else if (urlImage && urlImage !== "" && !image) {
+        sendUrlToBackend(urlImage);
       }
       setShowModal(false);
     } else setShowModal(true);
@@ -47,8 +55,7 @@ const Category = () => {
 
 
   const sendUrlToBackend = async (url) => {
-    // Thực hiện logic gửi URL về backend ở đây
-    console.log("url", url)
+
     const newCategory = await categoryApi.createCategory({
       name: categoryName,
       image: url,
@@ -90,7 +97,7 @@ const Category = () => {
 
   useEffect(() => {
     getData();
-  }, [])
+  }, [ timeSearch ])
 
   return (
     <BaseLayout selected="category">
@@ -143,8 +150,14 @@ const Category = () => {
         >
           <label className={classes.label} for="add-category">Category name</label>
           <input type="text" className={classes.addCategory} id="add-category" placeholder="New category" required="" onChange={(e) => setCategoryName(e.target.value)} />
-          <div className={classes.imageText} icon={UploadFile}>Image</div>
-          <Uploader style={{ height: "300px", width: "100%" }} image={image} setImage={setImage} fileName={fileName} setFileName={setFileName} />
+          <label className={classes.label} for="add-category">Url image</label>
+          <input type="text" className={classes.addCategory} id="add-category" placeholder="Enter your url image" required="" onChange={(e) => setUrlImage(e.target.value)} />
+          {(!urlImage || urlImage === "") && (
+            <div>
+              <div className={classes.imageText} icon={UploadFile}>Image</div>
+              <Uploader style={{ height: "300px", width: "100%" }} image={image} setImage={setImage} fileName={fileName} setFileName={setFileName} />
+            </div>
+          )}
         </DialogModal>
       </div>
     </BaseLayout>

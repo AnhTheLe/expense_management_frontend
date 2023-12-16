@@ -16,6 +16,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [timeSearch, setTimeSearch] = useState(null);
 
     useEffect(() => {
         refreshToken();
@@ -42,6 +43,10 @@ const AuthProvider = ({ children }) => {
             // Thực hiện các tác vụ cleanup nếu cần
         };
     }, []); 
+
+    const setTimeSearchFunc = (time) => {
+        setTimeSearch(time);
+    }
     
 
 
@@ -128,6 +133,8 @@ const AuthProvider = ({ children }) => {
                 login,
                 logout,
                 signUp,
+                timeSearch,
+                setTimeSearchFunc,
             }}
         >
             {children}

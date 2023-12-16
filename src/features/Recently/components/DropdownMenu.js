@@ -4,27 +4,24 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function DropdownMenu() {
-  const [age, setAge] = React.useState('');
+export default function DropdownMenu(props) {
+  const { categories, onChange, categorySelected } = props;
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120}} size="small">
+    <FormControl sx={{ m: 1, minWidth: 120}} size="small" fullWidth>
       <InputLabel id="demo-select-small-label">Categories</InputLabel>
       <Select
-        sx={{ borderRadius: '50px', boxShadow: '0px 1px 12px 2px rgba(0, 0, 0, 0.25)', backgroundColor: '#FFFFFF' }}
+        sx={{ borderRadius: '50px', backgroundColor: '#FFFFFF' }}
         labelId="demo-select-small-label"
         id="demo-select-small"
-        value={age}
-        label="Age"
-        onChange={handleChange}
+        value={categorySelected}
+        label="List categories"
+        onChange={(e) => onChange(e.target.value)}
       >
-        <MenuItem value={1}>Meal</MenuItem>
-        <MenuItem value={2}>Household</MenuItem>
-        <MenuItem value={3}>Game</MenuItem>
+        {categories.map((category, index) => (
+          <MenuItem key={index} value={category.id}>{category.categoryName}</MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

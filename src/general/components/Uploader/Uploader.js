@@ -6,7 +6,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 // import "./style.js"
 import "./style.scss"
 function Uploader(props) {
-    const {fileName, setFileName, image, setImage} = props
+    const { fileName, setFileName, image, setImage } = props
 
     return (
         <main>
@@ -33,7 +33,10 @@ function Uploader(props) {
                     {fileName}
                     <DeleteForeverIcon
                         style={{ cursor: "pointer", textAlign: "right", color: "#ca0147" }}
-                        onClick={() => setFileName("No selected File")} />
+                        onClick={() => {
+                            setFileName("No file selected");
+                            setImage(undefined);
+                        }} />
                 </span>
             </section>
         </main>
