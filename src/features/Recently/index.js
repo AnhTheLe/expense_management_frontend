@@ -86,7 +86,7 @@ const Recently = () => {
     return true;
   }
 
-  const handleClose = async () => {
+  const handleExecute = async () => {
     try {
       if (checkCanSubmit()) {
         const data = {
@@ -106,7 +106,7 @@ const Recently = () => {
     }
   }
 
-  const handleExecute = () => {
+  const handleClose = () => {
     setShowModal(false);
   }
 
