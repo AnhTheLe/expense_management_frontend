@@ -118,7 +118,7 @@ const Recently = () => {
   const getData = async () => {
     try {
       let response = null;
-      if (Utils.getTimeSearch(timeSearch) !== null) {
+      if (Utils.getTimeSearch(timeSearch) !== "") {
         response = await userExpenseApi.getUserExpense({ start_date: Utils.getTimeSearch(timeSearch) });
       } else {
         response = await userExpenseApi.getUserExpense();
