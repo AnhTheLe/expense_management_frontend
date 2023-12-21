@@ -3,6 +3,7 @@ import './style.scss'
 import Avatar from '../../assets/images/profile-avatar.png'
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { useCallback } from 'react';
 
 import UserHelper from 'general/helpers/UserHelper';
 
@@ -81,22 +82,19 @@ const Account = () => {
     document.querySelector('.update-panel').style.display = 'none';
   }
   
-
-  // useEffect(() => {
-  //   // getCurrentUser();
-    
-  //   return () => {
-  //     setUser([])
-  //   }
-  // }, []) 
-  
   useEffect(() => {
     const currentUsername = UserHelper.getUsername();
+    console.log(currentUsername);
     const getCurrentUser = async () => {
-        const currentUser = await authApi.getCurrentUser({ username: currentUsername });
+      try {
+        const currentUser = await authApi.getCurrentUser(currentUsername);
         if (currentUser) {
             setUser(currentUser.data);
         }
+      }
+      catch (error) {
+        console.log(error);
+      }
     }
     getCurrentUser(UserHelper.getUsername());
     return () => { };

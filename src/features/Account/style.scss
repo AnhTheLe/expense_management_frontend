@@ -1,3 +1,22 @@
+.update-panel{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  // display: flex;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.base-layout{
+  position: relative;
+}
+
 .account {
   .main-content {
     display: flex;
@@ -6,7 +25,6 @@
     flex-direction: row;
 
     .edit-function {
-      border-right: solid 1px #000;
       width: 30%;
       .avatar {
         display: flex;
@@ -37,10 +55,12 @@
       margin-left: 40px;
       display: flex;
       justify-content: space-around;
+      border-left: solid 1px #000;
+
 
       .left-col {
         .info-group {
-          margin-bottom: 20px;
+          margin-bottom: 4px;
           .group-title {
             margin-bottom: 10px;
             color: #2f80ed;
@@ -50,6 +70,7 @@
 
           .info {
             .info-item {
+
               .info-title {
                 font-weight: 700;
                 color: #505050;
