@@ -19,10 +19,10 @@ const Statistics = () => {
 
   const getTotalAmount = async () => {
     try {
-      const response = await statisticApi.getStatisticalByTime('2023-11-11' , '2023-12-22' );
-      if (response) {
-        setTotalAmount(response.data.userExpenses.totalAmount);
-      }
+      const response = await statisticApi.getStatisticalByCategory('2023-11-11' , '2023-12-22' );
+      // if (response) {
+      //   setTotalAmount(response.data.userExpenses.totalAmount);
+      // }
       console.log(response);
     } catch (error) {
       toast.error(error.message);
@@ -56,10 +56,7 @@ const Statistics = () => {
         <div className="main-content">
           <div className="general-stats">
             <div className="stat">
-              Total amount <br></br> {totalAmount} VND
-            </div>
-            <div className="stat">
-              Total amount <br></br> 880 Hours
+              Total amount <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
             </div>
             <div className="stat">
             Average expenses <br></br> 5.123.000 VND/month
