@@ -4,13 +4,16 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const PieChart = () => {
+const PieChart = (props) => {
   // Example data: 5 spending categories
-  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
-
+  const { listCategories } = props;
+  console.log("listCategories",listCategories);
+  // Example data: 5 spending categories
+  const categories = listCategories?.categories?.map((item) => item.categoryName);
   // Example data: random spending amounts for each category
   const generateRandomData = () => {
-    return categories.map(() => Math.floor(Math.random() * 1000));
+    return listCategories?.categories?.map((item) =>
+    item?.userExpensesList?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0));
   };
 
   const [chartData, setChartData] = useState(generateRandomData());
@@ -19,7 +22,7 @@ const PieChart = () => {
     // You can fetch real data here from an API or other data source
     // For this example, we'll generate random data on each render
     setChartData(generateRandomData());
-  }, []);
+  }, [listCategories]);
 
   const options = {
     chart: {
@@ -40,8 +43,8 @@ const PieChart = () => {
     },
     series: [
       {
-        name: 'Spending',
-        data: chartData.map((amount, index) => ({ name: categories[index], y: amount })),
+        name: 'Total amount',
+        data: chartData?.map((amount, index) => ({ name: categories[index], y: amount })),
       },
     ],
   };

@@ -7,20 +7,30 @@ import Utils from 'general/utils/Utils';
 
 const SpendingChart = (props) => {
   const { userExpenses } = props;
-  // Example data: random spending amounts for 30 days
-  const generateRandomData = () => {
-    return Array.from({ length: 30 }, () => Math.floor(Math.random() * 1000));
-  };
+
   console.log(userExpenses);
   // const [chartData, setChartData] = useState(generateRandomData());
-  const chartData = userExpenses?.lineItems?.map((item) => item.amount)
-  const timeChart = userExpenses?.lineItems?.map((item) => Utils.formatDate(item.createdAt, "Ngày không hợp lệ", "DD/MM/YYYY"))
+  const groupedExpensesByDate = {};
 
-  // useEffect(() => {
-  //   // You can fetch real data here from an API or other data source
-  //   // For this example, we'll generate random data on each render
-  //   setChartData(generateRandomData());
-  // }, []);
+  userExpenses?.lineItems?.forEach((item) => {
+    const createdAt = Utils.formatDate(item.createdAt, "Ngày không hợp lệ", "DD/MM/YYYY");
+
+    // Nếu ngày này chưa có trong đối tượng groupedExpensesByDate, tạo mới
+    if (!groupedExpensesByDate[createdAt]) {
+      groupedExpensesByDate[createdAt] = {
+        date: createdAt,
+        totalAmount: 0
+      };
+    }
+
+    // Cộng dồn amount vào tổng của ngày tương ứng
+    groupedExpensesByDate[createdAt].totalAmount += item.amount;
+  });
+
+  // Chuyển đối tượng thành mảng để sử dụng trong chart
+  const chartData = Object.values(groupedExpensesByDate).map((group) => group.totalAmount);
+  const timeChart = Object.values(groupedExpensesByDate).map((group) => group.date);
+
 
   const options = {
     chart: {

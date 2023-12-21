@@ -62,7 +62,7 @@ const Utils = {
     getTimeSearch: (timeSearch) => {
         switch (timeSearch) {
             case "Recently":
-                return "";
+                return  dayjs().format('YYYY-MM-DD');
             case "This Week":
                 return dayjs().startOf('week').format('YYYY-MM-DD');
             case "This Month":

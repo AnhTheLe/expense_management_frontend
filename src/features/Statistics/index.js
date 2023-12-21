@@ -15,39 +15,53 @@ const Statistics = () => {
   const { user, timeSearch } = useContext(AuthContext);
   const [totalAmount, setTotalAmount] = useState(0);
   const [userExpenses, setUserExpenses] = useState();
+  const [statisticByCategory, setStatisticByCategory] = useState();
 
-  
 
-  console.log(timeSearch);
 
-  const getTotalAmount = async () => {
-    try {
-      const response = await statisticApi.getStatisticalByTime('2023-11-11', '2023-12-22');
-      if (response) {
-        setUserExpenses(response.data.userExpenses)
-        setTotalAmount(response.data.userExpenses.totalAmount);
-      }
-      console.log(response);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  }
+  console.log(Utils.getTimeSearch(timeSearch));
+
+  // const getTotalAmount = async () => {
+  //   try {
+  //     const response = await statisticApi.getStatisticalByTime('2023-11-11', '2023-12-22');
+  //     if (response) {
+  //       setUserExpenses(response.data.userExpenses)
+  //       setTotalAmount(response.data.userExpenses.totalAmount);
+  //     }
+  //     console.log(response);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // }
 
   useEffect(() => {
-    getTotalAmount();
+    getData();
   }, [timeSearch])
 
   const getData = async () => {
     try {
       let response = null;
-      if (Utils.getTimeSearch(timeSearch) !== "") {
+      let statisticByCategories = null;
+      if (Utils.getTimeSearch(timeSearch) !== "" && Utils.getTimeSearch(timeSearch)) {
         response = await statisticApi.getStatisticalByTime({ start_date: Utils.getTimeSearch(timeSearch) });
+        if (timeSearch === "Recently") {
+          statisticByCategories = await statisticApi.getStatisticalByCategory({ end_date: Utils.getTimeSearch(timeSearch) })
+        } else {
+          statisticByCategories = await statisticApi.getStatisticalByCategory({ start_date: Utils.getTimeSearch(timeSearch) })
+        }
       } else {
         response = await statisticApi.getStatisticalByTime();
+        statisticByCategories = await statisticApi.getStatisticalByCategory()
       }
       // const response = await userExpenseApi.getUserExpense();
-      if (response.data.items) {
-        setTotalAmount(response.data.items)
+      console.log("response", response)
+      if (response.data) {
+        setUserExpenses(response.data.userExpenses)
+        setTotalAmount(response.data.userExpenses.totalAmount);
+      }
+      console.log("statisticByCategories", statisticByCategories)
+      if (statisticByCategories.data) {
+        setStatisticByCategory(statisticByCategories.data.statistical)
       }
     } catch (error) {
       toast.error(error.message);
@@ -72,7 +86,7 @@ const Statistics = () => {
               <SpendingChart userExpenses={userExpenses} />
             </div>
             <div className="pie-chart">
-              <PieChart />
+              <PieChart listCategories={statisticByCategory} />
             </div>
           </div>
         </div>

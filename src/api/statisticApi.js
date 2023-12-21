@@ -1,13 +1,13 @@
 import axiosClient from "./axiosClient";
 
 const statisticApi = {
-    getStatisticalByTime: (startDate, endDate) => {
-        const url = '/user-expenses/statistical-by-time?start_date=' + startDate + "&end_date=" +endDate;
-        return axiosClient.get(url);
+    getStatisticalByTime: (params) => {
+        const url = '/user-expenses/statistical-by-time';
+        return axiosClient.get(url,{params});
     },
-    getStatisticalByCategory: (startDate, endDate) => {
-        const url = '/user-expenses/statistical?start_date=' + startDate + "&end_date=" +endDate;
-        return axiosClient.get(url);
+    getStatisticalByCategory: (params) => {
+        const url = '/user-expenses/statistical';
+        return axiosClient.get(url,{params});
     },
 }
 

@@ -17,7 +17,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    const [timeSearch, setTimeSearch] = useState(null);
+    const [timeSearch, setTimeSearch] = useState("Recently");
 
     useEffect(() => {
         refreshToken();
