@@ -18,7 +18,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    const [timeSearch, setTimeSearch] = useState({start_date: dayjs().format('YYYY-MM-DD')});
+    const [timeSearch, setTimeSearch] = useState({start_date: dayjs().startOf('month').format('YYYY-MM-DD')});
 
     useEffect(() => {
         refreshToken();

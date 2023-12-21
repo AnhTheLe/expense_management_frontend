@@ -150,7 +150,7 @@ const Recently = () => {
               </div>
             ))}
           </div>
-          <Button class="add-button" onClick={() => setShowModal(true)}>
+          <Button className="add-button" onClick={() => setShowModal(true)}>
             <PlusIcon />
           </Button>
         </div>

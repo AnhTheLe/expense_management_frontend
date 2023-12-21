@@ -5,12 +5,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const PieChart = (props) => {
-  // Example data: 5 spending categories
   const { listCategories } = props;
-  console.log("listCategories",listCategories);
-  // Example data: 5 spending categories
   const categories = listCategories?.categories?.map((item) => item.categoryName);
-  // Example data: random spending amounts for each category
   const generateRandomData = () => {
     return listCategories?.categories?.map((item) =>
     item?.userExpensesList?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0));

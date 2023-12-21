@@ -49,13 +49,10 @@ const Statistics = () => {
         response = await statisticApi.getStatisticalByTime();
         statisticByCategories = await statisticApi.getStatisticalByCategory()
       }
-      // const response = await userExpenseApi.getUserExpense();
-      console.log("response", response)
       if (response.data) {
         setUserExpenses(response.data.userExpenses)
         setTotalAmount(response.data.userExpenses.totalAmount);
       }
-      console.log("statisticByCategories", statisticByCategories)
       if (statisticByCategories.data) {
         setStatisticByCategory(statisticByCategories.data.statistical)
       }
@@ -65,7 +62,7 @@ const Statistics = () => {
   }
 
   return (
-    <BaseLayout selected="statistics">
+    <BaseLayout selected="home">
       <div className="statistics">
         <div className="main-content">
           <div className="general-stats">

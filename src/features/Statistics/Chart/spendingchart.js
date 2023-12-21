@@ -7,8 +7,6 @@ import Utils from 'general/utils/Utils';
 
 const SpendingChart = (props) => {
   const { userExpenses } = props;
-
-  console.log(userExpenses);
   // const [chartData, setChartData] = useState(generateRandomData());
   const groupedExpensesByDate = {};
 

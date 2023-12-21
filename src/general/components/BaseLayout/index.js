@@ -38,11 +38,12 @@ function BaseLayout(props) {
 
     const onRangeChange = (dates, dateStrings) => {
         if (dates) {
-            setTimeSearchFunc({ start_date: Utils.formatDate(dateStrings[0],"Ngày không hợp lệ", "YYYY-MM-DD"), end_date: Utils.formatDate(dateStrings[1],"Ngày không hợp lệ", "YYYY-MM-DD") })
+            // setTimeSearchFunc({ start_date: Utils.formatDate(dateStrings[0],"Ngày không hợp lệ", "YYYY-MM-DD"), end_date: Utils.formatDate(dateStrings[1],"Ngày không hợp lệ", "YYYY-MM-DD") })
+            setTimeSearchFunc({ start_date: dateStrings[0], end_date: dateStrings[1] })
             console.log('From: ', dates[0], ', to: ', dates[1]);
             console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
         } else {
-            setTimeSearchFunc({ start_date: dayjs().format('YYYY-MM-DD') })
+            setTimeSearchFunc({ start_date: dayjs().startOf('month').format('YYYY-MM-DD') })
         }
     };
 
@@ -89,12 +90,19 @@ function BaseLayout(props) {
         <div className='layout-container'>
             <div className='header'>
                 <div className='logo'>
-                    <img src={Logo} alt='Logo' style={{width: "100%"}}/>
+                    <img src={Logo} alt='Logo' style={{ width: "100%" }} />
                 </div>
                 <div className='nav-bar'>
                     <div className='menu'>
                         {/* <DropdownMenu /> */}
-                        <RangePicker presets={rangePresets} onChange={onRangeChange} />
+                        <RangePicker presets={[
+                            {
+                                label: <span aria-label="Current Time to End of Day">Now ~ EOD</span>,
+                                value: () => [dayjs(), dayjs()], // 5.8.0+ support function
+                            },
+                            ...rangePresets,
+                        ]}
+                            onChange={onRangeChange} className="range-picker" />
                     </div>
                     <div className='nav-items'>
                         <div className='nav-item search'>
