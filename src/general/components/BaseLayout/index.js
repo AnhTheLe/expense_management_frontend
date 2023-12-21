@@ -39,9 +39,13 @@ function BaseLayout(props) {
     const onRangeChange = (dates, dateStrings) => {
         if (dates) {
             // setTimeSearchFunc({ start_date: Utils.formatDate(dateStrings[0],"Ngày không hợp lệ", "YYYY-MM-DD"), end_date: Utils.formatDate(dateStrings[1],"Ngày không hợp lệ", "YYYY-MM-DD") })
-            setTimeSearchFunc({ start_date: dateStrings[0], end_date: dateStrings[1] })
-            console.log('From: ', dates[0], ', to: ', dates[1]);
-            console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+            if (dateStrings[0] !== dateStrings[1]) {
+                setTimeSearchFunc({ start_date: dateStrings[0], end_date: dateStrings[1] })
+                console.log('From: ', dates[0], ', to: ', dates[1]);
+                console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+            } else {
+                setTimeSearchFunc({ start_date: dateStrings[0] })
+            }
         } else {
             setTimeSearchFunc({ start_date: dayjs().startOf('month').format('YYYY-MM-DD') })
         }
