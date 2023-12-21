@@ -3,20 +3,24 @@
 import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import Utils from 'general/utils/Utils';
 
-const SpendingChart = () => {
+const SpendingChart = (props) => {
+  const { userExpenses } = props;
   // Example data: random spending amounts for 30 days
   const generateRandomData = () => {
     return Array.from({ length: 30 }, () => Math.floor(Math.random() * 1000));
   };
+  console.log(userExpenses);
+  // const [chartData, setChartData] = useState(generateRandomData());
+  const chartData = userExpenses?.lineItems?.map((item) => item.amount)
+  const timeChart = userExpenses?.lineItems?.map((item) => Utils.formatDate(item.createdAt, "Ngày không hợp lệ", "DD/MM/YYYY"))
 
-  const [chartData, setChartData] = useState(generateRandomData());
-
-  useEffect(() => {
-    // You can fetch real data here from an API or other data source
-    // For this example, we'll generate random data on each render
-    setChartData(generateRandomData());
-  }, []);
+  // useEffect(() => {
+  //   // You can fetch real data here from an API or other data source
+  //   // For this example, we'll generate random data on each render
+  //   setChartData(generateRandomData());
+  // }, []);
 
   const options = {
     chart: {
@@ -26,7 +30,7 @@ const SpendingChart = () => {
       text: 'Spending Chart over Time',
     },
     xAxis: {
-      categories: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
+      categories: timeChart,
     },
     yAxis: {
       title: {

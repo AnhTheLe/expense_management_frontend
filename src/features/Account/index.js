@@ -25,11 +25,11 @@ const gender = [
   },
   {
     value: 'FEMALE',
-    label: 'female',
+    label: 'FEMALE',
   },
   {
     value: 'OTHER',
-    label: 'other',
+    label: 'OTHER',
   },
 ];
 
@@ -67,7 +67,7 @@ const Account = () => {
         gender: updateGender,
         dateOfBirth: updateDateOfBirth
       });
-      console.log(response.data);
+      console.log(response.data.id);
     } catch (error) {
       console.error('Error updating account:', error);
     }
@@ -213,12 +213,13 @@ const Account = () => {
             width={500}
             bgcolor={'#EEF0E5'}
             sx={{ padding: '40px', borderRadius: '20px', position: 'relative' }}
+            className='update-box'
           >
             <CloseRoundedIcon sx={{position: 'absolute', left: '90%', top: '4%'}} className='close-icon' onClick={hideUpdatePanel} />
             
-            <Typography variant="h4" component="h4" >
+            {/* <Typography variant="h4" component="h4" >
               Update profile
-            </Typography>
+            </Typography> */}
 
             <form>
               <TextField sx={{ marginBottom: '10px' }} 

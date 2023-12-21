@@ -1,4 +1,4 @@
-import {React, useState, useEffect, useContext} from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import Logo from "../../assets/images/logo.png";
 import Avatar from "../../assets/images/profile-avatar.png";
@@ -14,15 +14,19 @@ import "./style.scss";
 const Statistics = () => {
   const { user, timeSearch } = useContext(AuthContext);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [userExpenses, setUserExpenses] = useState();
+
+  
 
   console.log(timeSearch);
 
   const getTotalAmount = async () => {
     try {
-      const response = await statisticApi.getStatisticalByCategory('2023-11-11' , '2023-12-22' );
-      // if (response) {
-      //   setTotalAmount(response.data.userExpenses.totalAmount);
-      // }
+      const response = await statisticApi.getStatisticalByTime('2023-11-11', '2023-12-22');
+      if (response) {
+        setUserExpenses(response.data.userExpenses)
+        setTotalAmount(response.data.userExpenses.totalAmount);
+      }
       console.log(response);
     } catch (error) {
       toast.error(error.message);
@@ -59,13 +63,13 @@ const Statistics = () => {
               Total amount <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
             </div>
             <div className="stat">
-            Average expenses <br></br> 5.123.000 VND/month
+              Average expenses <br></br> 5.123.000 VND/month
             </div>
 
           </div>
           <div className="charts">
             <div className="spending-chart">
-              <SpendingChart />
+              <SpendingChart userExpenses={userExpenses} />
             </div>
             <div className="pie-chart">
               <PieChart />
