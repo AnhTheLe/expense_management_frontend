@@ -16,6 +16,7 @@ import { AuthContext } from 'AuthContext';
 import { Box, Typography, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { func } from 'prop-types';
 
 
 const gender = [
@@ -44,8 +45,12 @@ const Account = () => {
   const [updateDateOfBirth, setUpdateDateOfBirth] = useState(null);
   const [updateGender, setUpdateGender] = useState(null);
 
+  const [updatePassword, setUpdatePassword] = useState(null);
+
 
   const { user: currentUser } = useContext(AuthContext);
+
+  const userId = currentUser.id;
 
   // const getData = useCallback(async () => {
   //   try {
@@ -59,7 +64,7 @@ const Account = () => {
 
   const updateAccount = async () => {
     try {
-      const response = await userApi.editAccount(currentUser.id, {
+      const response = await userApi.editAccount(userId, {
         username: updateUsername,
         email: updateEmail,
         address: updateAddress,
@@ -67,7 +72,16 @@ const Account = () => {
         gender: updateGender,
         dateOfBirth: updateDateOfBirth
       });
-      console.log(response.data.id);
+    } catch (error) {
+      console.error('Error updating account:', error);
+    }
+  }
+
+  const updatePasswordFunc = async () => {
+    try {
+      const response = await userApi.updatePasswordApi(userId, {
+        password: updatePassword,
+      });
     } catch (error) {
       console.error('Error updating account:', error);
     }
@@ -80,6 +94,14 @@ const Account = () => {
 
   function hideUpdatePanel() {
     document.querySelector('.update-panel').style.display = 'none';
+  }
+
+  function showUpdatePassword() {
+    document.querySelector('.update-password').style.display = 'flex';
+  }
+
+  function hideUpdatePassword() {
+    document.querySelector('.update-password').style.display = 'none';
   }
   
   useEffect(() => {
@@ -98,7 +120,7 @@ const Account = () => {
     }
     getCurrentUser(UserHelper.getUsername());
     return () => { };
-  }, []);
+  }, [user, updateUsername, updateEmail, updateAddress, updatePhone, updateDateOfBirth, updateGender, updatePassword]);
 
   return (
 
@@ -116,7 +138,7 @@ const Account = () => {
                   Edit Profile
                 </Button>
               </a>
-              <a href='#'>
+              <a href='#' onClick={showUpdatePassword}>
                 <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: 'white', borderRadius: '18px' }} variant="text">
                   Change Password
                 </Button>
@@ -291,6 +313,46 @@ const Account = () => {
                   updateAccount();
                   hideUpdatePanel();
                   console.log(updateUsername, updateEmail, updateAddress, updatePhone, updateDateOfBirth, updateGender);
+                }}
+              >
+                Update
+              </Button>
+            </form>
+          </Box>
+        </div>
+      </div>
+
+      <div className='update-password'>
+        <div className='update-container'>
+          <Box
+            width={500}
+            bgcolor={'#EEF0E5'}
+            sx={{ padding: '40px', borderRadius: '20px', position: 'relative' }}
+            className='update-box'
+          >
+            <CloseRoundedIcon sx={{position: 'absolute', left: '90%', top: '4%'}} className='close-icon' onClick={hideUpdatePassword} />
+            
+            <Typography variant="h4" component="h4" >
+              Update Password
+            </Typography>
+
+            <form>
+              <TextField sx={{ marginBottom: '10px' }} 
+                id="pasword" 
+                // defaultValue={currentUser.username} 
+                fullWidth 
+                label="Password" 
+                variant="standard" 
+                value={updatePassword}
+                onChange={(e) => setUpdatePassword(e.target.value)}
+              />
+
+              <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: '#B6C4B6', borderRadius: '18px' }}
+                variant="text"
+                onClick={() => {
+                  updatePasswordFunc();
+                  hideUpdatePassword();
+                  console.log(updatePassword);
                 }}
               >
                 Update

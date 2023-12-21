@@ -7,9 +7,14 @@ const userApi = {
   },
 
   editAccount: (id, params) => {
-    const url = '/update-user/' + id;
+    const url = '/user/update-user/' + id;
     return axiosClient.put(url, params);
   },
+
+  updatePasswordApi: (id, params) => {
+    const url = '/user/update-user/' + id;
+    return axiosClient.put(url, params);
+  }
 };
 
 export default userApi;
