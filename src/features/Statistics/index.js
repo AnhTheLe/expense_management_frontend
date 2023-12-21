@@ -44,11 +44,7 @@ const Statistics = () => {
       let statisticByCategories = null;
       if (Utils.getTimeSearch(timeSearch) !== "" && Utils.getTimeSearch(timeSearch)) {
         response = await statisticApi.getStatisticalByTime({ start_date: Utils.getTimeSearch(timeSearch) });
-        if (timeSearch === "Recently") {
-          statisticByCategories = await statisticApi.getStatisticalByCategory({ end_date: Utils.getTimeSearch(timeSearch) })
-        } else {
-          statisticByCategories = await statisticApi.getStatisticalByCategory({ start_date: Utils.getTimeSearch(timeSearch) })
-        }
+        statisticByCategories = await statisticApi.getStatisticalByCategory({ start_date: Utils.getTimeSearch(timeSearch) })
       } else {
         response = await statisticApi.getStatisticalByTime();
         statisticByCategories = await statisticApi.getStatisticalByCategory()
