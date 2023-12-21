@@ -11,6 +11,7 @@ import { async } from "q";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -75,7 +76,7 @@ const AuthProvider = ({ children }) => {
             }
         } catch (error) {
             console.log("error", error);
-            if (error.data.message) {
+            if (error.data && error.data.message) {
                 ToastHelper.showError(error.data.message);
             }
             else { ToastHelper.showError(error.message) };

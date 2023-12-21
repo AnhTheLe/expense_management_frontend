@@ -130,7 +130,6 @@ const Recently = () => {
     } catch (error) {
       toast.error(error.message);
     }
-
   }
 
   return (

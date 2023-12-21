@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../Header";
 import NavItem from "./NavItem";
 import Logo from '../../../assets/images/logo.png'
+import Background from '../../../assets/images/background.jpg'
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -125,12 +126,12 @@ function BaseLayout(props) {
                                 Statistics
                             </Button>
                         </a> */}
-                        <NavItem
+                        {/* <NavItem
                             className={selected === "statistics" ? "NavItem_active" : ""}
                             onClick={() => navigate("/statistics")}
                             icon={<AssessmentOutlinedIcon />}
                             text="Statistic"
-                        />
+                        /> */}
                         
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
@@ -164,8 +165,21 @@ function BaseLayout(props) {
                         />
                     </div>
                 </div>
-                <div className='main-content-container'>
-                    {props.children}
+                <div className="main-content" style={{width:"100%"}}>
+                    <img src = {Background} alt="background" width="100%" height="170px"
+                    style={{
+                        display: "flex",
+                        marginLeft: "20px",
+                        overflow: "hidden",
+                        objectFit: "cover", 
+                        borderTopLeftRadius:"20px",
+                        borderTopRightRadius:"20px"}}/>
+                    <div className='main-content-container'      
+                       style={{
+                        borderTopLeftRadius:"0px",
+                        borderTopRightRadius:"0px"}}>
+                        {props.children}
+                    </div>
                 </div>
             </div>
         </div>
