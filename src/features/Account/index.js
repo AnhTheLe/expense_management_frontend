@@ -82,22 +82,19 @@ const Account = () => {
     document.querySelector('.update-panel').style.display = 'none';
   }
   
-
-  // useEffect(() => {
-  //   // getCurrentUser();
-    
-  //   return () => {
-  //     setUser([])
-  //   }
-  // }, []) 
-  
   useEffect(() => {
     const currentUsername = UserHelper.getUsername();
+    console.log(currentUsername);
     const getCurrentUser = async () => {
-        const currentUser = await authApi.getCurrentUser({ username: currentUsername });
+      try {
+        const currentUser = await authApi.getCurrentUser(currentUsername);
         if (currentUser) {
             setUser(currentUser.data);
         }
+      }
+      catch (error) {
+        console.log(error);
+      }
     }
     getCurrentUser(UserHelper.getUsername());
     return () => { };
