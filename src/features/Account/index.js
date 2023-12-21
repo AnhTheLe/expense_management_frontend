@@ -67,7 +67,7 @@ const Account = () => {
         gender: updateGender,
         dateOfBirth: updateDateOfBirth
       });
-      console.log(response.data);
+      console.log(response.data.id);
     } catch (error) {
       console.error('Error updating account:', error);
     }
