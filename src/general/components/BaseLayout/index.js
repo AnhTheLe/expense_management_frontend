@@ -19,18 +19,20 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 
 import DropdownMenu from "features/Account/components/DropdownMenu";
 import "./style.scss";
+import UserHelper from "general/helpers/UserHelper";
 
 BaseLayout.propTypes = {
     selected: PropTypes.string,
 };
 
-BaseLayout.defaultProps = {
-    selected: "home",
-};
-
 function BaseLayout(props) {
     const { selected } = props;
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        UserHelper.signOut();
+        window.location.reload();
+    }
     return (
         // <div className="min-vh-100 bg-light d-flex flex-column">
         //     <Header />
@@ -154,11 +156,12 @@ function BaseLayout(props) {
                             icon={<InfoOutlinedIcon />}
                             text="About us"
                         />
-                        <a href='#'>
-                            <Button sx={{ width: 180, height: 44, color: 'black', borderRadius: '18px' }} variant="text" startIcon={<SettingsApplicationsOutlinedIcon />}>
-                                Setting
-                            </Button>
-                        </a>
+                        <NavItem
+                            // className={selected === "logout" ? "NavItem_active" : ""}
+                            onClick={handleLogout}
+                            icon={<InfoOutlinedIcon />}
+                            text="Logout"
+                        />
                     </div>
                 </div>
                 <div className='main-content-container'>

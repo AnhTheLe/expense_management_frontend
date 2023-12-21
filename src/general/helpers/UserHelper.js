@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 import dayjs from "dayjs";
 // import { removeAxiosAccessToken } from "api/axiosClient";
 import PreferenceKeys from "general/constants/PreferenceKeys";
+import { removeAxiosAccessToken } from "api/axiosClient";
 
 const UserHelper = {
     // Check token
@@ -44,7 +45,7 @@ const UserHelper = {
     signOut: () => {
         localStorage.removeItem(PreferenceKeys.accessToken);
         localStorage.removeItem(PreferenceKeys.refreshToken);
-        // removeAxiosAccessToken();
+        removeAxiosAccessToken();
     },
 };
 

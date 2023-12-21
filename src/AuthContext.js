@@ -1,5 +1,6 @@
 import authApi from "api/authApi";
 import {
+    refreshToken,
     removeAxiosAccessToken,
     updateAxiosAccessToken,
 } from "api/axiosClient";
@@ -15,30 +16,39 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [timeSearch, setTimeSearch] = useState(null);
 
     useEffect(() => {
-        setLoggedIn(
-            UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired()
-        );
-        // setUser(UserHelper.getUsername());
-        const currentUsername = UserHelper.getUsername();
-        const getCurrentUser = async () => {
-            const currentUser = await authApi.getCurrentUser({ username: currentUsername });
-            if (currentUser) {
-                setUser(currentUser.data);
-            }
-        }
-        getCurrentUser(UserHelper.getUsername());
-        return () => { };
-    }, []);
+        refreshToken();
+        const checkUserToken = async () => {
+            const isLoggedIn = UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired();
+            setLoggedIn(isLoggedIn);
     
-    console.log("user", user);
-    const getCurrentUser = async (username) => {
-        const currentUser = await authApi.getCurrentUser({ username: username });
-        if (currentUser) {
-            setUser(currentUser);
-        }
+            if (isLoggedIn) {
+                const currentUsername = UserHelper.getUsername();
+                try {
+                    const currentUser = await authApi.getCurrentUser(currentUsername);
+                    if (currentUser && currentUser.data) {
+                        setUser(currentUser.data);
+                    }
+                } catch (error) {
+                    console.error("Error fetching current user:", error);
+                    // Xử lý lỗi nếu cần
+                }
+            }
+        };
+    
+        checkUserToken();
+        return () => {
+            // Thực hiện các tác vụ cleanup nếu cần
+        };
+    }, []); 
+
+    const setTimeSearchFunc = (time) => {
+        setTimeSearch(time);
     }
+    
+
 
     const login = async (username, password) => {
         try {
@@ -58,7 +68,10 @@ const AuthProvider = ({ children }) => {
                 );
                 setLoggedIn(true);
                 ToastHelper.showSuccess("Login success");
-                getCurrentUser(username);
+                const currentUser = await authApi.getCurrentUser(username);
+                if (currentUser) {
+                    setUser(currentUser);
+                }
             }
         } catch (error) {
             console.log("error", error);
@@ -120,6 +133,8 @@ const AuthProvider = ({ children }) => {
                 login,
                 logout,
                 signUp,
+                timeSearch,
+                setTimeSearchFunc,
             }}
         >
             {children}

@@ -3,12 +3,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { AuthContext } from 'AuthContext';
+import { useContext } from 'react';
 
 export default function DropdownMenu() {
-  const [age, setAge] = React.useState('');
+  const { timeSearch, setTimeSearchFunc} = useContext(AuthContext);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setTimeSearchFunc(event.target.value);
   };
 
   return (
@@ -18,13 +20,13 @@ export default function DropdownMenu() {
         sx={{ borderRadius: '50px', boxShadow: '0px 1px 12px 2px rgba(0, 0, 0, 0.25)', backgroundColor: '#FFFFFF' }}
         labelId="demo-select-small-label"
         id="demo-select-small"
-        value={age}
+        value={timeSearch}
         label="Age"
         onChange={handleChange}
       >
-        <MenuItem value={1}>Recently</MenuItem>
-        <MenuItem value={2}>This Week</MenuItem>
-        <MenuItem value={3}>This Month</MenuItem>
+        <MenuItem value={"Recently"}>Recently</MenuItem>
+        <MenuItem value={"This Week"}>This Week</MenuItem>
+        <MenuItem value={"This Month"}>This Month</MenuItem>
       </Select>
     </FormControl>
   );
