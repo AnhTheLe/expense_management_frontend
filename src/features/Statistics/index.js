@@ -42,9 +42,9 @@ const Statistics = () => {
     try {
       let response = null;
       let statisticByCategories = null;
-      if (Utils.getTimeSearch(timeSearch) !== "" && Utils.getTimeSearch(timeSearch)) {
-        response = await statisticApi.getStatisticalByTime({ start_date: Utils.getTimeSearch(timeSearch) });
-        statisticByCategories = await statisticApi.getStatisticalByCategory({ start_date: Utils.getTimeSearch(timeSearch) })
+      if (timeSearch) {
+        response = await statisticApi.getStatisticalByTime(timeSearch);
+        statisticByCategories = await statisticApi.getStatisticalByCategory(timeSearch)
       } else {
         response = await statisticApi.getStatisticalByTime();
         statisticByCategories = await statisticApi.getStatisticalByCategory()

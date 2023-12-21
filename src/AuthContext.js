@@ -4,6 +4,7 @@ import {
     removeAxiosAccessToken,
     updateAxiosAccessToken,
 } from "api/axiosClient";
+import dayjs from "dayjs";
 import PreferenceKeys from "general/constants/PreferenceKeys";
 import ToastHelper from "general/helpers/ToastHelper";
 import UserHelper from "general/helpers/UserHelper";
@@ -17,7 +18,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    const [timeSearch, setTimeSearch] = useState("Recently");
+    const [timeSearch, setTimeSearch] = useState({start_date: dayjs().format('YYYY-MM-DD')});
 
     useEffect(() => {
         refreshToken();

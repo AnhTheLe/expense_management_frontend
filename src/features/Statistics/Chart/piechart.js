@@ -19,8 +19,6 @@ const PieChart = (props) => {
   const [chartData, setChartData] = useState(generateRandomData());
 
   useEffect(() => {
-    // You can fetch real data here from an API or other data source
-    // For this example, we'll generate random data on each render
     setChartData(generateRandomData());
   }, [listCategories]);
 
