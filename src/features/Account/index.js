@@ -1,110 +1,42 @@
 import React, { useContext, useEffect } from 'react'
 import './style.scss'
+import Logo from '../../assets/images/logo.png'
 import Avatar from '../../assets/images/profile-avatar.png'
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useCallback } from 'react';
 
-import UserHelper from 'general/helpers/UserHelper';
-
 
 import BaseLayout from 'general/components/BaseLayout';
 import userApi from 'api/userApi';
-import authApi from 'api/authApi';
 import { AuthContext } from 'AuthContext';
-import { Box, Typography, TextField } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-
-
-const gender = [
-  {
-    value: 'MALE',
-    label: 'MALE',
-  },
-  {
-    value: 'FEMALE',
-    label: 'female',
-  },
-  {
-    value: 'OTHER',
-    label: 'other',
-  },
-];
-
 
 const Account = () => {
-  const [user, setUser] = useState({});
-
-  const [updateUsername, setUpdateUsername] = useState(null);
-  const [updateEmail, setUpdateEmail] = useState(null);
-  const [updateAddress, setUpdateAddress] = useState(null);
-  const [updatePhone, setUpdatePhone] = useState(null);
-  const [updateDateOfBirth, setUpdateDateOfBirth] = useState(null);
-  const [updateGender, setUpdateGender] = useState(null);
-
+  const [user, setUser] = useState([]);
 
   const { user: currentUser } = useContext(AuthContext);
 
-  // const getData = useCallback(async () => {
-  //   try {
-  //     const response = await userApi.getCurrentUser(currentUser)
-  //     console.log(response)
-  //     setUser(response.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }, [])
-
-  const updateAccount = async () => {
+  const getData = useCallback(async () => {
     try {
-      const response = await userApi.editAccount(currentUser.id, {
-        username: updateUsername,
-        email: updateEmail,
-        address: updateAddress,
-        phone: updatePhone,
-        gender: updateGender,
-        dateOfBirth: updateDateOfBirth
-      });
-      console.log(response.data);
+      const response = await userApi.getCurrentUser(currentUser)
+      console.log(response)
+      setUser(response.data)
     } catch (error) {
-      console.error('Error updating account:', error);
+      console.log(error)
     }
-  }
+  }, [])
 
-
-  function showUpdatePanel() {
-    document.querySelector('.update-panel').style.display = 'flex';
-  }
-
-  function hideUpdatePanel() {
-    document.querySelector('.update-panel').style.display = 'none';
-  }
-  
-
-  // useEffect(() => {
-  //   // getCurrentUser();
-    
-  //   return () => {
-  //     setUser([])
-  //   }
-  // }, []) 
-  
   useEffect(() => {
-    const currentUsername = UserHelper.getUsername();
-    const getCurrentUser = async () => {
-        const currentUser = await authApi.getCurrentUser({ username: currentUsername });
-        if (currentUser) {
-            setUser(currentUser.data);
-        }
+    getData()
+    
+    return () => {
+      setUser([])
     }
-    getCurrentUser(UserHelper.getUsername());
-    return () => { };
-  }, []);
+  }, [])  
 
   return (
 
-    <BaseLayout selected='account' className='base-layout'>
+    <BaseLayout selected='account'>
       <div className='account'>
         <div className='main-content'>
 
@@ -113,7 +45,7 @@ const Account = () => {
               <img src={Avatar} alt='Logo' />
             </div>
             <div className='button-container'>
-              <a href='#' onClick={showUpdatePanel}>
+              <a href='#'>
                 <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: 'white', borderRadius: '18px' }} variant="text">
                   Edit Profile
                 </Button>
@@ -127,6 +59,7 @@ const Account = () => {
           </div>
 
           <div className='user-info'>
+
             <div className='left-col'>
               <div className='info-group'>
                 <div className='group-title'>
@@ -146,7 +79,7 @@ const Account = () => {
                       Gender
                     </label>
                     <p className='info-content'>
-                      {user.gender ?? 'Null'}
+                      Null
                     </p>
                   </div>
                   <div className='info-item'>
@@ -154,7 +87,15 @@ const Account = () => {
                       Date of birth
                     </label>
                     <p className='info-content'>
-                      {user.dateOfBirth ?? 'Null'}
+                      Null
+                    </p>
+                  </div>
+                  <div className='info-item'>
+                    <label className='info-title'>
+                      Nationality
+                    </label>
+                    <p className='info-content'>
+                      Null
                     </p>
                   </div>
                 </div>
@@ -170,7 +111,23 @@ const Account = () => {
                       City
                     </label>
                     <p className='info-content'>
-                      {user.address ?? 'Null'}
+                      Null
+                    </p>
+                  </div>
+                  <div className='info-item'>
+                    <label className='info-title'>
+                      State
+                    </label>
+                    <p className='info-content'>
+                      Null
+                    </p>
+                  </div>
+                  <div className='info-item'>
+                    <label className='info-title'>
+                      Country
+                    </label>
+                    <p className='info-content'>
+                      Null
                     </p>
                   </div>
                 </div>
@@ -190,7 +147,7 @@ const Account = () => {
                         Phone number
                       </label>
                       <p className='info-content'>
-                        {user.phone ?? 'Null'}
+                        Null
                       </p>
                     </div>
                     <div className='info-item'>
@@ -198,7 +155,7 @@ const Account = () => {
                         Email
                       </label>
                       <p className='info-content'>
-                        {user.email ?? 'Null'}
+                        {user.email}
                       </p>
                     </div>
                   </div>
@@ -206,98 +163,6 @@ const Account = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className='update-panel'>
-        <div className='update-container'>
-          <Box
-            width={500}
-            bgcolor={'#EEF0E5'}
-            sx={{ padding: '40px', borderRadius: '20px', position: 'relative' }}
-          >
-            <CloseRoundedIcon sx={{position: 'absolute', left: '90%', top: '4%'}} className='close-icon' onClick={hideUpdatePanel} />
-            
-            <Typography variant="h4" component="h4" >
-              Update profile
-            </Typography>
-
-            <form>
-              <TextField sx={{ marginBottom: '10px' }} 
-                id="username" 
-                defaultValue={currentUser.username} 
-                fullWidth 
-                label="Username" 
-                variant="standard" 
-                value={updateUsername}
-                onChange={(e) => setUpdateUsername(e.target.value)}
-              />
-              <TextField sx={{ marginBottom: '10px' }} 
-                id="email" 
-                defaultValue={currentUser.email} 
-                fullWidth 
-                label="Email" 
-                variant="standard" 
-                value={updateEmail}
-                onChange={(e) => setUpdateEmail(e.target.value)}
-              />
-              <TextField sx={{ marginBottom: '10px' }} 
-                id="address" 
-                defaultValue={currentUser.address ?? ''} 
-                fullWidth 
-                label="Address" 
-                variant="standard" 
-                value={updateAddress}
-                onChange={(e) => setUpdateAddress(e.target.value)}
-              />
-              <TextField sx={{ marginBottom: '10px' }} 
-                id="phone" 
-                defaultValue={currentUser.phone ?? ''} 
-                fullWidth 
-                label="Phone" 
-                variant="standard" 
-                value={updatePhone}
-                onChange={(e) => setUpdatePhone(e.target.value)}
-              />
-              <TextField sx={{ marginBottom: '10px' }} 
-                id="date-of-birth" 
-                defaultValue={currentUser.date_of_birth ?? ''} 
-                fullWidth 
-                label="Date of birth" 
-                variant="standard" 
-                value={updateDateOfBirth}
-                onChange={(e) => setUpdateDateOfBirth(e.target.value)}  
-              />
-
-
-              <TextField sx={{ marginBottom: '10px' }} fullWidth
-                id="gender"
-                select
-                label="Gender"
-                defaultValue="gender"
-                helperText="Please select your gender"
-                value={updateGender}
-                onChange={(e) => setUpdateGender(e.target.value)}
-              >
-                {gender.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <Button sx={{ width: 180, height: 44, color: 'black', bgcolor: '#B6C4B6', borderRadius: '18px' }}
-                variant="text"
-                onClick={() => {
-                  updateAccount();
-                  hideUpdatePanel();
-                  console.log(updateUsername, updateEmail, updateAddress, updatePhone, updateDateOfBirth, updateGender);
-                }}
-              >
-                Update
-              </Button>
-            </form>
-          </Box>
         </div>
       </div>
 
