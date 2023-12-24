@@ -17,6 +17,7 @@ import { Box, Typography, TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { func } from 'prop-types';
+import { toast } from 'react-toastify';
 
 
 const gender = [
@@ -38,17 +39,15 @@ const gender = [
 const Account = () => {
   const [user, setUser] = useState({});
 
-  const [updateUsername, setUpdateUsername] = useState(null);
-  const [updateEmail, setUpdateEmail] = useState(null);
-  const [updateAddress, setUpdateAddress] = useState(null);
-  const [updatePhone, setUpdatePhone] = useState(null);
-  const [updateDateOfBirth, setUpdateDateOfBirth] = useState(null);
-  const [updateGender, setUpdateGender] = useState(null);
+  const { user: currentUser } = useContext(AuthContext);
+  const [updateUsername, setUpdateUsername] = useState(currentUser.username);
+  const [updateEmail, setUpdateEmail] = useState(currentUser.email);
+  const [updateAddress, setUpdateAddress] = useState(currentUser.address);
+  const [updatePhone, setUpdatePhone] = useState(currentUser.phone);
+  const [updateDateOfBirth, setUpdateDateOfBirth] = useState(currentUser.dateOfBirth);
+  const [updateGender, setUpdateGender] = useState(currentUser.gender);
 
   const [updatePassword, setUpdatePassword] = useState(null);
-
-
-  const { user: currentUser } = useContext(AuthContext);
 
   const userId = currentUser.id;
 
@@ -78,6 +77,7 @@ const Account = () => {
           setUser(newUser.data);
         }
       }
+      toast.success('Update account successfully!');
     } catch (error) {
       console.error('Error updating account:', error);
     }
@@ -88,6 +88,13 @@ const Account = () => {
       const response = await userApi.updatePasswordApi(userId, {
         password: updatePassword,
       });
+      if(response) {
+        const newUser = await userApi.getCurrentUser(UserHelper.getUsername());
+        if (newUser) {
+          setUser(newUser.data);
+        }
+        toast.success('Update password successfully!');
+      }
     } catch (error) {
       console.error('Error updating account:', error);
     }
@@ -301,7 +308,7 @@ const Account = () => {
                 id="gender"
                 select
                 label="Gender"
-                defaultValue="gender"
+                defaultValue={currentUser.gender ?? "gender"}
                 helperText="Please select your gender"
                 value={updateGender}
                 onChange={(e) => setUpdateGender(e.target.value)}
