@@ -56,13 +56,13 @@ const Utils = {
 
     formatPriceWithVNDCurrency: (money) => {
         var value = money?.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-        return value?.substring(0, value.length - 2) + " đ";
+        return value?.substring(0, value.length - 2);
     },
 
     getTimeSearch: (timeSearch) => {
         switch (timeSearch) {
             case "Recently":
-                return "";
+                return  dayjs().format('YYYY-MM-DD');
             case "This Week":
                 return dayjs().startOf('week').format('YYYY-MM-DD');
             case "This Month":

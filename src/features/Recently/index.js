@@ -119,7 +119,7 @@ const Recently = () => {
     try {
       let response = null;
       if (Utils.getTimeSearch(timeSearch) !== "") {
-        response = await userExpenseApi.getUserExpense({ start_date: Utils.getTimeSearch(timeSearch) });
+        response = await userExpenseApi.getUserExpense(timeSearch);
       } else {
         response = await userExpenseApi.getUserExpense();
       }
@@ -130,7 +130,6 @@ const Recently = () => {
     } catch (error) {
       toast.error(error.message);
     }
-
   }
 
   return (
@@ -151,7 +150,7 @@ const Recently = () => {
               </div>
             ))}
           </div>
-          <Button class="add-button" onClick={() => setShowModal(true)}>
+          <Button className="add-button" onClick={() => setShowModal(true)}>
             <PlusIcon />
           </Button>
         </div>

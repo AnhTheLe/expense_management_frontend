@@ -4,6 +4,7 @@ import {
     removeAxiosAccessToken,
     updateAxiosAccessToken,
 } from "api/axiosClient";
+import dayjs from "dayjs";
 import PreferenceKeys from "general/constants/PreferenceKeys";
 import ToastHelper from "general/helpers/ToastHelper";
 import UserHelper from "general/helpers/UserHelper";
@@ -11,12 +12,13 @@ import { async } from "q";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    const [timeSearch, setTimeSearch] = useState(null);
+    const [timeSearch, setTimeSearch] = useState({start_date: dayjs().startOf('month').format('YYYY-MM-DD')});
 
     useEffect(() => {
         refreshToken();
@@ -75,7 +77,7 @@ const AuthProvider = ({ children }) => {
             }
         } catch (error) {
             console.log("error", error);
-            if (error.data.message) {
+            if (error.data && error.data.message) {
                 ToastHelper.showError(error.data.message);
             }
             else { ToastHelper.showError(error.message) };

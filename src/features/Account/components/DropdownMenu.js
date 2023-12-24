@@ -22,6 +22,7 @@ export default function DropdownMenu() {
         id="demo-select-small"
         value={timeSearch}
         label="Age"
+        defaultValue={"Recently"}
         onChange={handleChange}
       >
         <MenuItem value={"Recently"}>Recently</MenuItem>
