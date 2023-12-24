@@ -79,6 +79,7 @@ const Account = () => {
       }
       toast.success('Update account successfully!');
     } catch (error) {
+      toast.error('Update account failed!');
       console.error('Error updating account:', error);
     }
   }
@@ -96,6 +97,7 @@ const Account = () => {
         toast.success('Update password successfully!');
       }
     } catch (error) {
+      toast.error('Update password failed!');
       console.error('Error updating account:', error);
     }
   }
