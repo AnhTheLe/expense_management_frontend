@@ -72,6 +72,12 @@ const Account = () => {
         gender: updateGender,
         dateOfBirth: updateDateOfBirth
       });
+      if(response) {
+        const newUser = await userApi.getCurrentUser(UserHelper.getUsername());
+        if (newUser) {
+          setUser(newUser.data);
+        }
+      }
     } catch (error) {
       console.error('Error updating account:', error);
     }
@@ -120,7 +126,7 @@ const Account = () => {
     }
     getCurrentUser(UserHelper.getUsername());
     return () => { };
-  }, [user, updateUsername, updateEmail, updateAddress, updatePhone, updateDateOfBirth, updateGender, updatePassword]);
+  }, []);
 
   return (
 
