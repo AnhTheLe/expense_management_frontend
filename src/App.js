@@ -42,14 +42,6 @@ function App() {
             }
           />
           <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="/category"
             element={
               <PrivateRoute>
@@ -74,7 +66,7 @@ function App() {
             }
           />
           <Route
-            path="/statistics"
+            path="/home"
             element={
               <PrivateRoute>
                 <Statistics />

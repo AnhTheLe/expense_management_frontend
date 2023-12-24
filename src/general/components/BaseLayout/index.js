@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Header from "../Header";
 import NavItem from "./NavItem";
 import Logo from '../../../assets/images/logo.png'
+import Background from '../../../assets/images/background.jpg'
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -20,6 +21,10 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 import DropdownMenu from "features/Account/components/DropdownMenu";
 import "./style.scss";
 import UserHelper from "general/helpers/UserHelper";
+import { DatePicker, Space } from 'antd';
+import dayjs from "dayjs";
+import { AuthContext } from "AuthContext";
+import Utils from "general/utils/Utils";
 
 BaseLayout.propTypes = {
     selected: PropTypes.string,
@@ -28,6 +33,30 @@ BaseLayout.propTypes = {
 function BaseLayout(props) {
     const { selected } = props;
     const navigate = useNavigate();
+    const { RangePicker } = DatePicker;
+    const { setTimeSearchFunc } = useContext(AuthContext);
+
+    const onRangeChange = (dates, dateStrings) => {
+        if (dates) {
+            // setTimeSearchFunc({ start_date: Utils.formatDate(dateStrings[0],"Ngày không hợp lệ", "YYYY-MM-DD"), end_date: Utils.formatDate(dateStrings[1],"Ngày không hợp lệ", "YYYY-MM-DD") })
+            if (dateStrings[0] !== dateStrings[1]) {
+                setTimeSearchFunc({ start_date: dateStrings[0], end_date: dateStrings[1] })
+                console.log('From: ', dates[0], ', to: ', dates[1]);
+                console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+            } else {
+                setTimeSearchFunc({ start_date: dateStrings[0] })
+            }
+        } else {
+            setTimeSearchFunc({ start_date: dayjs().startOf('month').format('YYYY-MM-DD') })
+        }
+    };
+
+    const rangePresets = [
+        { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
+        { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
+        { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
+        { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()] },
+    ];
 
     const handleLogout = () => {
         UserHelper.signOut();
@@ -65,11 +94,19 @@ function BaseLayout(props) {
         <div className='layout-container'>
             <div className='header'>
                 <div className='logo'>
-                    <img src={Logo} alt='Logo' />
+                    <img src={Logo} alt='Logo' style={{ width: "100%" }} />
                 </div>
                 <div className='nav-bar'>
                     <div className='menu'>
-                        <DropdownMenu />
+                        {/* <DropdownMenu /> */}
+                        <RangePicker presets={[
+                            {
+                                label: <span aria-label="Current Time to End of Day">Now ~ EOD</span>,
+                                value: () => [dayjs(), dayjs()], // 5.8.0+ support function
+                            },
+                            ...rangePresets,
+                        ]}
+                            onChange={onRangeChange} className="range-picker" />
                     </div>
                     <div className='nav-items'>
                         <div className='nav-item search'>
@@ -125,13 +162,13 @@ function BaseLayout(props) {
                                 Statistics
                             </Button>
                         </a> */}
-                        <NavItem
+                        {/* <NavItem
                             className={selected === "statistics" ? "NavItem_active" : ""}
                             onClick={() => navigate("/statistics")}
                             icon={<AssessmentOutlinedIcon />}
                             text="Statistic"
-                        />
-                        
+                        /> */}
+
                         <NavItem
                             className={selected === "account" ? "NavItem_active" : ""}
                             onClick={() => navigate("/account")}
@@ -164,8 +201,23 @@ function BaseLayout(props) {
                         />
                     </div>
                 </div>
-                <div className='main-content-container'>
-                    {props.children}
+                <div className="main-content" style={{ width: "100%" }}>
+                    <img src={Background} alt="background" width="100%" height="170px"
+                        style={{
+                            display: "flex",
+                            marginLeft: "20px",
+                            overflow: "hidden",
+                            objectFit: "cover",
+                            borderTopLeftRadius: "20px",
+                            borderTopRightRadius: "20px"
+                        }} />
+                    <div className='main-content-container'
+                        style={{
+                            borderTopLeftRadius: "0px",
+                            borderTopRightRadius: "0px"
+                        }}>
+                        {props.children}
+                    </div>
                 </div>
             </div>
         </div>

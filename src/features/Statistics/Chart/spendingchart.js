@@ -3,20 +3,32 @@
 import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import Utils from 'general/utils/Utils';
 
-const SpendingChart = () => {
-  // Example data: random spending amounts for 30 days
-  const generateRandomData = () => {
-    return Array.from({ length: 30 }, () => Math.floor(Math.random() * 1000));
-  };
+const SpendingChart = (props) => {
+  const { userExpenses } = props;
+  // const [chartData, setChartData] = useState(generateRandomData());
+  const groupedExpensesByDate = {};
 
-  const [chartData, setChartData] = useState(generateRandomData());
+  userExpenses?.lineItems?.forEach((item) => {
+    const createdAt = Utils.formatDate(item.createdAt, "Ngày không hợp lệ", "DD/MM/YYYY");
 
-  useEffect(() => {
-    // You can fetch real data here from an API or other data source
-    // For this example, we'll generate random data on each render
-    setChartData(generateRandomData());
-  }, []);
+    // Nếu ngày này chưa có trong đối tượng groupedExpensesByDate, tạo mới
+    if (!groupedExpensesByDate[createdAt]) {
+      groupedExpensesByDate[createdAt] = {
+        date: createdAt,
+        totalAmount: 0
+      };
+    }
+
+    // Cộng dồn amount vào tổng của ngày tương ứng
+    groupedExpensesByDate[createdAt].totalAmount += item.amount;
+  });
+
+  // Chuyển đối tượng thành mảng để sử dụng trong chart
+  const chartData = Object.values(groupedExpensesByDate).map((group) => group.totalAmount);
+  const timeChart = Object.values(groupedExpensesByDate).map((group) => group.date);
+
 
   const options = {
     chart: {
@@ -26,7 +38,7 @@ const SpendingChart = () => {
       text: 'Spending Chart over Time',
     },
     xAxis: {
-      categories: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
+      categories: timeChart,
     },
     yAxis: {
       title: {
