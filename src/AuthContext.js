@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
         const checkUserToken = async () => {
             const isLoggedIn = UserHelper.checkToken() && !UserHelper.checkRefreshTokenExpired();
             setLoggedIn(isLoggedIn);
-    
+
             if (isLoggedIn) {
                 const currentUsername = UserHelper.getUsername();
                 try {
@@ -37,17 +37,17 @@ const AuthProvider = ({ children }) => {
                 }
             }
         };
-    
+
         checkUserToken();
         return () => {
             // Thực hiện các tác vụ cleanup nếu cần
         };
-    }, []); 
+    }, []);
 
     const setTimeSearchFunc = (time) => {
         setTimeSearch(time);
     }
-    
+
 
 
     const login = async (username, password) => {
