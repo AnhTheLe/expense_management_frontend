@@ -11,7 +11,7 @@ const SpendingChart = (props) => {
   const groupedExpensesByDate = {};
 
   userExpenses?.lineItems?.forEach((item) => {
-    const createdAt = Utils.formatDate(item.createdAt, "Ngày không hợp lệ", "DD/MM/YYYY");
+    const createdAt = Utils.formatDate(item.expenseDate, "Ngày không hợp lệ", "DD/MM/YYYY");
 
     // Nếu ngày này chưa có trong đối tượng groupedExpensesByDate, tạo mới
     if (!groupedExpensesByDate[createdAt]) {
