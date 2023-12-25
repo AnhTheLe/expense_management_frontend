@@ -35,19 +35,19 @@ const SpendingChart = (props) => {
       type: 'column',
     },
     title: {
-      text: 'Spending Chart over Time',
+      text: 'Expense',
     },
     xAxis: {
       categories: timeChart,
     },
     yAxis: {
       title: {
-        text: 'Amount',
+        text: 'VND',
       },
     },
     series: [
       {
-        name: 'Spending',
+        name: 'money',
         data: chartData,
       },
     ],

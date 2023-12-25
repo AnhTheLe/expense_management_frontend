@@ -9,7 +9,7 @@ const PieChart = (props) => {
   const categories = listCategories?.categories?.map((item) => item.categoryName);
   const generateRandomData = () => {
     return listCategories?.categories?.map((item) =>
-    item?.userExpensesList?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0));
+      item?.userExpensesList?.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0));
   };
 
   const [chartData, setChartData] = useState(generateRandomData());
@@ -23,7 +23,7 @@ const PieChart = (props) => {
       type: 'pie',
     },
     title: {
-      text: 'Spending Pie Chart',
+      text: 'Category',
     },
     plotOptions: {
       pie: {
@@ -37,7 +37,7 @@ const PieChart = (props) => {
     },
     series: [
       {
-        name: 'Total amount',
+        name: 'Total money',
         data: chartData?.map((amount, index) => ({ name: categories[index], y: amount })),
       },
     ],

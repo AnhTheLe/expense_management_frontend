@@ -67,7 +67,7 @@ const Statistics = () => {
         <div className="main-content">
           <div className="general-stats">
             <div className="stat">
-              Total amount <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
+              Total money <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
             </div>
             <div className="stat">
               Average expenses <br></br> 5.123.000 VND/month
