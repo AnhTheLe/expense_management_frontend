@@ -10,12 +10,12 @@ const userExpenseApi = {
         return axiosClient.post(url, data);
     },
     deleteUserExpense: (id) => {
-        const url = '/user-expenses'
+        const url = '/user-expenses/' + id
         console.log(id);
-        // return axiosClient.delete(url, id)
+        return axiosClient.delete(url)
     },
     updateUserExpense: (data, id) => {
-        const url = '/user-expenses'
+        const url = '/user-expenses/' + id
         return axiosClient.put(url, data)
     }
 }

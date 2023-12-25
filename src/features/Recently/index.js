@@ -124,12 +124,11 @@ const Recently = () => {
           name: expenseName,
           note: note,
           userId: user.id,
-          expenseId: userExpenses[editIndex].id,
-          date: selectedDate,
+          expenseDate: selectedDate,
         }
         console.log(data);
-        // await userExpenseApi.createUserExpense(data);
-        // getData();
+        await userExpenseApi.updateUserExpense(data, userExpenses[editIndex].id);
+        getData();
       }
       handleCloseEditDialog();
       toast.success("Expense edited successfully");
@@ -190,6 +189,12 @@ const Recently = () => {
   }
 
   useEffect(() => {
+    setAmount(null)
+    setExpenseName(null)
+    setNote(null)
+  }, [showModal])
+
+  useEffect(() => {
     getListCategories();
     getData();
   }, [timeSearch])
@@ -219,7 +224,7 @@ const Recently = () => {
           <div className="expense-list">
             {userExpenses && userExpenses.map((expense, index) => (
               <div className="expense" key={index}>
-                <div className="date">{Utils.formatDate(expense.updatedAt, "Ngày không hợp lệ", "DD/MM/YYYY")}</div>
+                <div className="date">{Utils.formatDate(expense.expenseDate, "Ngày không hợp lệ", "DD/MM/YYYY")}</div>
                 <div className="item-list">
                   <div className="item">
                     <div>
