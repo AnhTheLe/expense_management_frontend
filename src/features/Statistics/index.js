@@ -20,7 +20,7 @@ const Statistics = () => {
   const [statisticByCategory, setStatisticByCategory] = useState();
   const [listUserExpensesThisMonth, setListUserExpensesThisMonth] = useState([]);
 
-  const avgTotalAmonut = listUserExpensesThisMonth?.reduce((total, expense) => total + expense.amount, 0) / listUserExpensesThisMonth?.length;
+  const avgTotalAmonut = listUserExpensesThisMonth?.reduce((total, expense) => total + expense.amount, 0);
 
 
 
