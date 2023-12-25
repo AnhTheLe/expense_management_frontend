@@ -112,7 +112,7 @@ function BaseTextField(props) {
                         onChange={onChange}
                         placeholder={placeholder}
                         autoComplete={autoComplete}
-                        onBlur={handleOnBlur}
+                        // onBlur={handleOnBlur}
                     />
                     {type === "password" && (
                         <div

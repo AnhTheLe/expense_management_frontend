@@ -223,7 +223,7 @@ const Recently = () => {
       <div className="recently">
         <div className="main-content">
           <div className = "header-content">
-            <div className="title">List of expenses</div>
+            <div className="title" style={{width: "50%"}}>List of expenses</div>
             <div className="title">Total amount: {Utils.formatPrice(getTotalAmount)}</div>
           </div>
           <div className="expense-list">
