@@ -10,12 +10,17 @@ import PieChart from "./Chart/piechart";
 import { AuthContext } from "AuthContext";
 import Utils from "general/utils/Utils";
 import "./style.scss";
+import userExpenseApi from "api/userExpenseApi";
+import dayjs from "dayjs";
 
 const Statistics = () => {
   const { user, timeSearch } = useContext(AuthContext);
   const [totalAmount, setTotalAmount] = useState(0);
   const [userExpenses, setUserExpenses] = useState();
   const [statisticByCategory, setStatisticByCategory] = useState();
+  const [listUserExpensesThisMonth, setListUserExpensesThisMonth] = useState([]);
+
+  const avgTotalAmonut = listUserExpensesThisMonth?.reduce((total, expense) => total + expense.amount, 0) / listUserExpensesThisMonth?.length;
 
 
 
@@ -56,6 +61,8 @@ const Statistics = () => {
       if (statisticByCategories.data) {
         setStatisticByCategory(statisticByCategories.data.statistical)
       }
+      const listUserExpensesThisMonth = await userExpenseApi.getUserExpense({startDate: dayjs().startOf('month').format('YYYY-MM-DD'), endDate: dayjs().format('YYYY-MM-DD')});
+      setListUserExpensesThisMonth(listUserExpensesThisMonth.data.items);
     } catch (error) {
       toast.error(error.message);
     }
@@ -70,7 +77,7 @@ const Statistics = () => {
               Total amount <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
             </div>
             <div className="stat">
-              Average expenses <br></br> 5.123.000 VND/month
+              Average expenses <br></br> {Utils.formatPriceWithVNDCurrency(avgTotalAmonut)} VND
             </div>
 
           </div>
