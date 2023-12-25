@@ -4,13 +4,19 @@
     flex-direction: column;
     width: 100%;
     align-items: flex-start;
-    .title {
-      color: #000;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      margin-bottom: 16px;
+    .header-content{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .title {
+        color: #000;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 16px;
+      }
     }
     .expense-list {
       width: 100%;

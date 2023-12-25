@@ -138,6 +138,7 @@ const Recently = () => {
   };
 
 
+  const getTotalAmount = userExpenses?.reduce((total, expense) => total + expense.amount, 0)
 
   const getListCategories = async () => {
     try {
@@ -165,7 +166,7 @@ const Recently = () => {
 
   const handleExecute = async () => {
     try {
-      if (checkCanSubmit()) {
+            if (checkCanSubmit()) {
         const data = {
           categoryId: categorySelected,
           amount: amount,
@@ -215,12 +216,16 @@ const Recently = () => {
       toast.error(error.message);
     }
   }
+  console.log("userExpenses", userExpenses);
 
   return (
     <BaseLayout selected="recently">
       <div className="recently">
         <div className="main-content">
-          <div className="title">List of expenses</div>
+          <div className = "header-content">
+            <div className="title">List of expenses</div>
+            <div className="title">Total amount: {Utils.formatPrice(getTotalAmount)}</div>
+          </div>
           <div className="expense-list">
             {userExpenses && userExpenses.map((expense, index) => (
               <div className="expense" key={index}>
