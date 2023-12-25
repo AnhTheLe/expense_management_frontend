@@ -231,8 +231,8 @@ const Recently = () => {
       <div className="recently">
         <div className="main-content">
           <div className="header-content">
-            <div className="title" style={{ width: "50%" }}>List of expenses</div>
-            <div className="title">Total amount: {Utils.formatPrice(getTotalAmount)}</div>
+            <div className="title" style={{ width: "40%" }}>List of expenses</div>
+            <div className="title">Total: {Utils.formatPrice(getTotalAmount)} VND</div>
           </div>
           <div className="expense-list">
             {userExpenses && userExpenses.map((expense, index) => (
@@ -242,7 +242,7 @@ const Recently = () => {
                   <div className="item">
                     <div>
                       <Typography variant="subtitle2">Name</Typography>
-                      <Typography variant="body1">{expense.expenseName}</Typography>
+                      <Typography variant="body1" color="textSecondary">{expense.expenseName}</Typography>
 
                       <Typography variant="subtitle2">Note</Typography>
                       <Typography variant="body2" color="textSecondary">
