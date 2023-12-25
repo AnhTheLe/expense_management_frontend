@@ -62,7 +62,7 @@ NumericFormatCustom.propTypes = {
 
 
 const Recently = () => {
-
+  const dateFormat = 'YYYY-MM-DD';
   const [showModal, setShowModal] = useState(false);
   const classes = useStyles({ "height": "300px" });
   const [userExpenses, setUserExpenses] = useState([]);
@@ -77,6 +77,7 @@ const Recently = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedUserExpense, setSlectedUserExpense] = useState(null);
 
   const onChange = (date, dateString) => {
     setSelectedDate(dateString)
@@ -103,9 +104,16 @@ const Recently = () => {
     }
   };
 
-  const handleOpenEditDialog = (index) => {
+  const handleOpenEditDialog = (index, expense) => {
     setEditIndex(index);
+    // setSlectedUserExpense(expense)
+    setAmount(expense.amount)
+    setExpenseName(expense.expenseName)
+    setNote(expense.note)
+    setCategorySelected(expense.categoryId)
+    setSelectedDate(expense.expenseDate)
     setEditDialogOpen(true);
+
   };
 
   const handleCloseEditDialog = () => {
@@ -166,7 +174,7 @@ const Recently = () => {
 
   const handleExecute = async () => {
     try {
-            if (checkCanSubmit()) {
+      if (checkCanSubmit()) {
         const data = {
           categoryId: categorySelected,
           amount: amount,
@@ -222,7 +230,7 @@ const Recently = () => {
     <BaseLayout selected="recently">
       <div className="recently">
         <div className="main-content">
-          <div className = "header-content">
+          <div className="header-content">
             <div className="title">List of expenses</div>
             <div className="title">Total amount: {Utils.formatPrice(getTotalAmount)}</div>
           </div>
@@ -247,7 +255,7 @@ const Recently = () => {
                       </Typography>
                     </div>
                     <div className="actions">
-                      <Button startIcon={<EditIcon />} size="small" onClick={() => handleOpenEditDialog(index)}>
+                      <Button startIcon={<EditIcon />} size="small" onClick={() => handleOpenEditDialog(index, expense)}>
                       </Button>
                       <Button startIcon={<DeleteIcon />} size="small" style={{ color: 'red', backgroundColor: 'white' }} onClick={() => handleOpenDeleteDialog(index)}>
                       </Button>
@@ -315,7 +323,18 @@ const Recently = () => {
             <Grid item sm={6}>
               <BaseTextField label="Name" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} />
               <BaseTextField label="Note" autoHeight={true} className={classes.addCategory} value={note} onChange={(e) => setNote(e.target.value)} />
-
+              <ConfigProvider
+                theme={{
+                  components: {
+                    DatePicker: {
+                      zIndexPopup: 10000000000000,
+                      /* here is your component tokens */
+                    },
+                  },
+                }}
+              >
+                <DatePicker onChange={onChange} value={dayjs(Utils.formatDate(selectedDate, "", "YYYY-MM-DD"), dateFormat)} />
+              </ConfigProvider>
             </Grid>
             <Grid item sm={6}>
               {/* <BaseTextField label="Date" type="date" /> */}
