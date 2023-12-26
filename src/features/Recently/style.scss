@@ -4,10 +4,12 @@
     flex-direction: column;
     width: 100%;
     align-items: flex-start;
-    .header-content{
+
+    .header-content {
       width: 100%;
       display: flex;
       align-items: center;
+
       // justify-content: space-between;
       .title {
         color: #000;
@@ -18,25 +20,30 @@
         margin-bottom: 16px;
       }
     }
+
     .expense-list {
       width: 100%;
       border-radius: 25px;
       padding: 16px;
       background: #d9d9d9;
       max-height: 90vh;
+
       .expense {
         border-radius: 16px;
         // display: flex;
         padding: 8px;
         margin: 8px;
         background: white;
+
         // align-items: center;
         .date {
           font-weight: 650;
         }
+
         .item-list {
           padding: 8px;
           margin: 8px;
+
           .item {
             margin: 8px;
             display: flex;
@@ -45,6 +52,7 @@
         }
       }
     }
+
     .add-button {
       display: flex;
       border-radius: 50px;

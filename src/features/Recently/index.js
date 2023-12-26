@@ -286,18 +286,6 @@ const Recently = () => {
             <Grid item sm={6}>
               <BaseTextField label="Name" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} />
               <BaseTextField label="Note" autoHeight={true} className={classes.addCategory} value={note} onChange={(e) => setNote(e.target.value)} />
-              <ConfigProvider
-                theme={{
-                  components: {
-                    DatePicker: {
-                      zIndexPopup: 10000000000000,
-                      /* here is your component tokens */
-                    },
-                  },
-                }}
-              >
-                <DatePicker onChange={onChange} />
-              </ConfigProvider>
             </Grid>
             <Grid item sm={6}>
               <div style={{ marginTop: "24px" }}>
@@ -318,6 +306,24 @@ const Recently = () => {
                 />
               </div>
             </Grid>
+            <Grid item sm={6}>
+              <div style={{ paddingTop: "4px" }}>
+                <span className={classes.label} style={{ paddingRight: "4px" }}>Date</span>
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      DatePicker: {
+                        zIndexPopup: 10000000000000,
+                        /* here is your component tokens */
+                      },
+                    },
+                  }}
+                  style={{ with: '50px' }}
+                >
+                  <DatePicker onChange={onChange} />
+                </ConfigProvider>
+              </div>
+            </Grid>
           </Grid>
         </DialogModal>
         <DialogModal
@@ -330,18 +336,6 @@ const Recently = () => {
             <Grid item sm={6}>
               <BaseTextField label="Name" value={expenseName} onChange={(e) => setExpenseName(e.target.value)} />
               <BaseTextField label="Note" autoHeight={true} className={classes.addCategory} value={note} onChange={(e) => setNote(e.target.value)} />
-              <ConfigProvider
-                theme={{
-                  components: {
-                    DatePicker: {
-                      zIndexPopup: 10000000000000,
-                      /* here is your component tokens */
-                    },
-                  },
-                }}
-              >
-                <DatePicker onChange={onChange} value={dayjs(Utils.formatDate(selectedDate, "", "YYYY-MM-DD"), dateFormat)} />
-              </ConfigProvider>
             </Grid>
             <Grid item sm={6}>
               {/* <BaseTextField label="Date" type="date" /> */}
@@ -361,6 +355,23 @@ const Recently = () => {
                     inputComponent: NumericFormatCustom,
                   }}
                 />
+              </div>
+            </Grid>
+            <Grid item sm={6}>
+              <div style={{ paddingTop: "4px" }}>
+                <span className={classes.label} style={{ paddingRight: "4px" }}>Date</span>
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      DatePicker: {
+                        zIndexPopup: 10000000000000,
+                        /* here is your component tokens */
+                      },
+                    },
+                  }}
+                >
+                  <DatePicker onChange={onChange} value={dayjs(Utils.formatDate(selectedDate, "", "YYYY-MM-DD"), dateFormat)} />
+                </ConfigProvider>
               </div>
             </Grid>
           </Grid>
