@@ -61,7 +61,7 @@ const Statistics = () => {
       if (statisticByCategories.data) {
         setStatisticByCategory(statisticByCategories.data.statistical)
       }
-      const listUserExpensesThisMonth = await userExpenseApi.getUserExpense({startDate: dayjs().startOf('month').format('YYYY-MM-DD'), endDate: dayjs().format('YYYY-MM-DD')});
+      const listUserExpensesThisMonth = await userExpenseApi.getUserExpense({ startDate: dayjs().startOf('month').format('YYYY-MM-DD'), endDate: dayjs().format('YYYY-MM-DD') });
       setListUserExpensesThisMonth(listUserExpensesThisMonth.data.items);
     } catch (error) {
       toast.error(error.message);
@@ -77,7 +77,7 @@ const Statistics = () => {
               Total money <br></br> {Utils.formatPriceWithVNDCurrency(totalAmount)} VND
             </div>
             <div className="stat">
-              Average expenses <br></br> {Utils.formatPriceWithVNDCurrency(avgTotalAmonut)} VND
+              Expense per month <br></br> {Utils.formatPriceWithVNDCurrency(avgTotalAmonut)} VND
             </div>
 
           </div>

@@ -197,11 +197,18 @@ const Recently = () => {
     setShowModal(false);
   }
 
-  useEffect(() => {
+  const handleOpenCreateNew = () => {
     setAmount(null)
     setExpenseName(null)
     setNote(null)
-  }, [showModal])
+    setShowModal(true)
+  }
+
+  // useEffect(() => {
+  //   setAmount(null)
+  //   setExpenseName(null)
+  //   setNote(null)
+  // }, [showModal])
 
   useEffect(() => {
     getListCategories();
@@ -265,7 +272,7 @@ const Recently = () => {
               </div>
             ))}
           </div>
-          <Button className="add-button" onClick={() => setShowModal(true)}>
+          <Button className="add-button" onClick={() => handleOpenCreateNew()}>
             <PlusIcon />
           </Button>
         </div>
